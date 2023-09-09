@@ -1,0 +1,64 @@
+
+
+  body {
+    font-family: "Roboto","Liberation Mono","Courier New",monospace;
+    margin: 10px;
+    height: 300px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+  ul {
+    list-style: none;
+    padding: 0;
+    color: white;
+  }
+
+  li {
+    margin: 5px;
+  }
+
+  a {
+    color: blue;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  #get-urls {
+    background-color: #7134eb;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: auto;
+    align-self: flex-end;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+  }
+
+  #get-urls:hover {
+    background-color: #34eb3a;
+    color: black;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+  }
+  #company {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    text-shadow: 5px 5px 6px rgba(0, 0, 0, .5);
+  }
+  .svg-shadow {
+      -webkit-filter: drop-shadow( 0px 5px 6px rgba(0, 0, 0, .2));
+      filter: drop-shadow( 10px 10px 10px rgba(0, 0, 0, .3));
+  }

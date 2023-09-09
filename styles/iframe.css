@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: chocolate;
+  }
+
+  .header {
+    background-color: blueviolet;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .email-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .email-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .email-item:hover {
+    background-color: #f0f0f0;
+  }

@@ -1,0 +1,43 @@
+
+{
+  "manifest_version": 3,
+  "name": "Shadowsafe",
+  "version": "1.0",
+  "author": "Tony Antony",
+  "description": "Get your uat and staging credentials in ine place",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://uat.alaanpay.com/*",
+        "https://staging.vualapp.com/*",
+        "https://github.com/login/*",
+        "https://www.facebook.com/login/*",
+        "https://employ.remote.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons":{
+    "16": "icons/logo.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+   },
+   "action": {
+    "default_popup": "popup.html",
+    "default_title": "A tooltip popup description when you hover over the Chrome Extension icon."
+   },
+   "web_accessible_resources": [ {
+    "resources": [ "data/*", "index.html", "popup.html", "js/*", "css/*", "images/*", "iframe.html" ],
+    "matches": [ "*://*/*" ]
+    } ]
+  }
