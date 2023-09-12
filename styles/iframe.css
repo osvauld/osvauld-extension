@@ -1,16 +1,23 @@
 body {
     margin: 0;
     padding: 0;
+    padding-top: 30px;
     font-family: Arial, sans-serif;
-    font-size: 16px;
-    background-color: chocolate;
+    background-color: #EEEEEE;
+    font-size: medium;
+    letter-spacing: 1.4px;
   }
 
   .header {
-    background-color: blueviolet;
-    padding: 10px;
+    background-color: #7134eb;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top:0;
+    padding: 5px;
     text-align: center;
     font-weight: bold;
+    font-size: 18px;
   }
 
   .email-list {
@@ -19,13 +26,14 @@ body {
     padding: 0;
   }
 
-
   .email-item {
     border-bottom: 1px solid #e0e0e0;
     padding: 10px;
+    text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s ease-in;
   }
 
   .email-item:hover {
-    background-color: #f0f0f0;
+    background-color: #8BC34A;
   }

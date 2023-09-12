@@ -1,8 +1,7 @@
 let searchBar = document.querySelector('textarea[title="Search"]');
 let inputs = document.querySelectorAll("input");
-//searchBar.value = "ShadowSafe";
-console.log("inputs =>", inputs);
 
+//searchBar.value = "ShadowSafe";
 let alanUsername = "tonyantony301@yahoo.com";
 let alanPassword = "test2123@";
 
@@ -39,13 +38,20 @@ for (let input of inputs) {
     let container = document.createElement("div");
     // Set the id, style, and position properties for the container element
     container.id = "cm-iframe-container";
-    container.style.position = "fixed";
-    container.style.top = "10px";
-    container.style.right = "10px";
-    container.style.width = "400px";
-    container.style.height = "calc(100% - 20px)";
-    container.style.zIndex = "2147483650";
+    container.style.position = "absolute";
+    container.style.top =
+      input.getBoundingClientRect().top +
+      window.scrollY +
+      input.getBoundingClientRect().height +
+      "px";
+    container.style.right = input.getBoundingClientRect().left + "px";
+    container.style.width = input.offsetWidth + "px";
+
+    container.style.height = "auto";
+    container.style.zIndex = "2";
     container.style.display = "none";
+    container.style.transform = "none";
+    container.style.boxShadow = "5px 5px 10px rgba(0,0,0,0.1)";
 
     let iframe = document.createElement("iframe");
     iframe.id = "cm-iframe";
@@ -58,16 +64,36 @@ for (let input of inputs) {
 
     document.body.appendChild(container);
 
-    icon.addEventListener("click", () => {
+    icon.addEventListener("click", (e) => {
       if (container.style.display === "none") {
         container.style.display = "block";
       } else {
         container.style.display = "none";
       }
-      //   chrome.runtime.sendMessage({ action: "iconClicked", input: input.value });
+    });
+
+    window.addEventListener("resize", () => {
+      // console.log("dropdown is active");
+      container.style.top =
+        input.getBoundingClientRect().top +
+        window.scrollY +
+        input.getBoundingClientRect().height +
+        "px";
+      container.style.right = input.getBoundingClientRect().left + "px";
     });
 
     input.parentNode.insertBefore(icon, input.nextSibling);
+
+    window.addEventListener("message", (message) => {
+      let container = document.getElementById("cm-iframe-container");
+      if (message.data.action === "emailSelected") {
+        let email = message.data.email;
+        // Assign the email value to the input field
+        container.style.display = "none";
+        console.log("email received at context", email);
+        input.value = email;
+      }
+    });
 
     //     if (
     //       input.getAttribute("name") === "email" ||
@@ -85,12 +111,3 @@ for (let input of inputs) {
     //     }
   }
 }
-
-window.addEventListener("message", (message) => {
-  if (message.data.action === "emailSelected") {
-    let email = message.data.email;
-    // Assign the email value to the input field
-
-    // input.value = email;
-  }
-});
