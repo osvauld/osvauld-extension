@@ -6,7 +6,7 @@ function getTabUrls() {
   // Use the chrome.tabs API to query all the tabs
   chrome.tabs.query({}, (tabs) => {
     // Loop through the tabs
-    console.log("tabs  ============>", tabs);
+    //console.log("tabs  ============>", tabs);
     for (let tab of tabs) {
       // Get the URL of each tab
       let tabUrl = tab.url;
@@ -59,26 +59,38 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 let activeTab;
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message === "getActiveUrl") {
-    console.log("active tab message received in the background");
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
-      console.log("active tab is => ", tab);
-      activeTab = tab;
-    });
-    sendResponse(activeTab);
-  }
-});
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//   if (message === "getActiveUrl") {
+//     console.log("active tab message received in the background");
+//     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
+//       console.log("active tab is => ", tab);
+//       activeTab = tab;
+//     });
+//     sendResponse(activeTab);
+//   }
+// });
 
 // look for url and fill the form
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  // Check if the tab URL matches the specific URL
-  if (changeInfo.url && changeInfo.url === "https://www.google.com/") {
-    console.log("specified url found");
-    chrome.scripting.executeScript({
-      target: { tabId: tabId },
-      files: ["content.js"],
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message === "fetchCredentials") {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
+      activeTab = tab;
     });
+    // if (activeTab[0] && activeTab[0].url) {
+    //   sendResponse(activeTab[0].url);
+    // }
+    sendResponse(["john.doe@example.com", "jhon@123"]);
   }
 });
+
+// chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+//   // Check if the tab URL matches the specific URL
+//   if (changeInfo.url && changeInfo.url === "https://www.google.com/") {
+//     console.log("specified url found");
+//     chrome.scripting.executeScript({
+//       target: { tabId: tabId },
+//       files: ["content.js"],
+//     });
+//   }
+// });

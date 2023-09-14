@@ -1,7 +1,7 @@
 
 {
   "manifest_version": 3,
-  "name": "Shadowsafe",
+  "name": "shadowsafe",
   "version": "1.0",
   "author": "Tony Antony",
   "description": "Get your uat and staging credentials in ine place",
@@ -14,10 +14,11 @@
     {
       "matches": [
         "https://uat.alaanpay.com/*",
-        "https://staging.vualapp.com/*",
         "https://github.com/login/*",
-        "https://www.facebook.com/login/*",
-        "https://employ.remote.com/*"
+        "https://employ.remote.com/*",
+        "https://www.ratatype.com/login/*",
+        "https://login.stanford.edu/idp/*",
+        "https://courses.iitbombayx.in/login/*"
       ],
       "js": [
         "content.js"

@@ -5,11 +5,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #EEEEEE;
     font-size: medium;
-    letter-spacing: 1.4px;
   }
 
   .header {
-    background-color: #7134eb;
+    background-color:  #3A4468;
     color: white;
     width: 100%;
     position: fixed;
@@ -27,13 +26,14 @@ body {
   }
 
   .email-item {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid gainsboro;
     padding: 10px;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.15s ease-in;
   }
 
   .email-item:hover {
-    background-color: #8BC34A;
+    background-color: #9fa5bb;
   }
