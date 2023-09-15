@@ -32,11 +32,11 @@ for (let input of inputs) {
     icon.style.display = "flex";
     icon.style.justifyContent = "center";
     icon.style.alignItems = "center";
-    icon.style.right = "-10%";
+    icon.style.right = "4%";
     icon.style.top = input.offsetTop + 4 + "px";
     icon.style.cursor = "pointer";
 
-    input.parentNode.insertBefore(icon, input.nextSibling);
+    input.parentNode.appendChild(icon);
 
     // Create a new element that will be the container for the iframe
     let container = document.createElement("div");
@@ -152,11 +152,11 @@ for (let input of inputs) {
     icon2.style.display = "flex";
     icon2.style.justifyContent = "center";
     icon2.style.alignItems = "center";
-    icon2.style.right = "-10%";
+    icon2.style.right = "4%";
     icon2.style.top = input.offsetTop + 4 + "px";
     icon2.style.cursor = "pointer";
 
-    input.parentNode.insertBefore(icon2, input.nextSibling);
+    input.parentNode.appendChild(icon2);
 
     window.addEventListener("message", async (message) => {
       if (message.data.action === "emailSelected") {
