@@ -1,4 +1,4 @@
-const DemoView = () => {
+const EmptyCreds = () => {
     return (
       <div className="w-full h-full flex justify-center items-start">
         <p className="text-base text-white font-light ">
@@ -9,5 +9,5 @@ const DemoView = () => {
     )
   }
   
-  export default DemoView
+  export default EmptyCreds
   

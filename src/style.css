@@ -15,57 +15,155 @@ body {
     background-color: #3A4468;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-
+    overflow-y: scroll;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .list-item {
-    height: 25%;
+    min-height: 25%;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 6%;
 }
 
 
 .heading  {
-    height: 25%;
+    min-height: 25%;
     width: 100%;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     color: white;
     line-height: 24px;
     padding-top: 20px;
     padding-left: 20px;
+    position: sticky;
+    top: 0;
+    background-color: #2E3654;
+    z-index: 10;
 }
-
 
 
 .list-item:nth-of-type(odd){
-    background-color: #3A4468;
-}
-
-.list-item:nth-of-type(even){
     background-color: #2E3654;
 }
 
-
-.username-box {
-    border: 1px solid #828CAE;
-
-    padding: 5px 5px;
-    width: 80%;
-    height: 40px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.list-item:nth-of-type(even){
+    background-color: #3A4468;
 }
 
-.username-box p {
+
+.list-item p {
     margin-left: 10px;
     line-height: 24px;
+    font-size: 16px;
     color: #828CAE;
-    letter-spacing: 0.6px;
+    font-weight: medium;
+    line-height: 24px;
+    transition: scale 0.15s ease-in;
+}
+
+.list-item:hover p {
+        scale: 1.06;
+}
+
+.list-item .icon-enter {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.11s ease-in;
+}
+
+.list-item .icon-enter svg {
+    transition: scale 0.15s ease-in;
+} 
+
+.list-item .icon-enter:hover {
+    background-color: #262C44;
+}
+
+
+.list-item .icon-enter:hover svg {
+    scale: 1.4;
+}
+
+
+.cred-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #262C44;
+    box-sizing: border-box;
+}
+
+
+
+.back-section {
+    width: 90%;
+    height: 20%;
+ 
+}
+
+.back-section svg {
+    scale: 1.2;
+}
+
+
+.cred-section {
+    height: 70%;
+    width: 80%;
+    color: white;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.cred-section h3 {
+    font-size: small;
+    font-weight: normal;
+    margin: 5px 0;
+}
+
+.cred-section p {
+    font-size: small;
+    font-weight: normal;
+    margin: 5px 0;
+    color: #828CAE;
+}
+
+.username, .password {
+    width: 100%;
+    border: 1px solid #828CAE;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 40px;
+    background-color: #2E3654;
+    margin-bottom: 5px;
+}
+
+
+
+.button-section {
+   padding-top: 25px;
+}
+
+.button-section button {
+    background-color:  #4E46DC;
+    font-size: small;
+    font-weight: normal;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 30px;
 }
