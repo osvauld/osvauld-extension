@@ -14,10 +14,12 @@ import "./style.css"
 
 function IndexPopup() {
  // const [data, setData] = useState("")
- const [credentialStatus, setCredentialStatus] = useState(false)
-// const [credentialSelected, setCredentialSelected] = useState(false)
+ // const [credentialSelected, setCredentialSelected] = useState(false)
  //let credentialStatus = true; 
+ const [credentialStatus, setCredentialStatus] = useState(false)
  let credentialSelected = true;
+
+
 
   return (
 
