@@ -108,11 +108,11 @@ body {
 .back-section {
     width: 90%;
     height: 20%;
- 
+    transition: scale 0.15s ease-in;
 }
 
-.back-section svg {
-    scale: 1.2;
+.back-section svg:hover {
+    scale: 1.4;
 }
 
 
@@ -153,6 +153,22 @@ body {
     margin-bottom: 5px;
 }
 
+.cred-section input {
+    background-color: #2E3654;
+    width: 110%;
+    height: 100%;
+    border: none;
+    border-radius: 25px;
+} 
+
+.cred-section input {
+    all: unset;
+    padding-left: 5px;
+    font-size: medium;
+    font-weight: normal;
+    color: #828CAE;
+  }
+
 
 
 .button-section {
@@ -166,4 +182,10 @@ body {
     color: white;
     padding: 10px 50px;
     border-radius: 30px;
+    transition: background-color 0.15s ease;
+}
+
+
+.login-button button:hover {
+    background-color: #3A4468;
 }

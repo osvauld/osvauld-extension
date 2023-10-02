@@ -1,7 +1,11 @@
-const CredView = () => {
+const CredView = ({chageToList}) => {
+
+  const listUpdater =() => {
+    chageToList(false)
+  };
     return (
       <div className="cred-container">
-            <div className="back-section">
+            <div className="back-section" onClick={listUpdater}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.27206 7.29402C1.90931 7.6845 1.90931 8.31863 2.27206 8.7091L6.91517 13.7071C7.27792 14.0976 7.86701 14.0976 8.22976 13.7071C8.5925 13.3167 8.5925 12.6825 8.22976 12.2921L5.1682 8.99961H14.0714C14.585 8.99961 15 8.55291 15 8C15 7.44709 14.585 7.00039 14.0714 7.00039H5.1711L8.22685 3.70793C8.5896 3.31745 8.5896 2.68333 8.22685 2.29285C7.86411 1.90238 7.27502 1.90238 6.91227 2.29285L2.26916 7.2909L2.27206 7.29402Z" fill="#828CAE"/>
                 </svg>
@@ -25,8 +29,8 @@ const CredView = () => {
 
                     </div>
             </div>
-            <div className="button-section">
-                    <button>Fill Credentials</button>
+            <div className="button-section ">
+                    <button >Fill Credentials</button>
             </div>
       </div>
     )
