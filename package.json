@@ -29,8 +29,9 @@
     "typescript": "5.2.2"
   },
   "manifest": {
-    "host_permissions": [
-       "http://*/",
-      "https://*/*"]
+    "permissions": [
+      "cookies"
+   ],
+    "host_permissions": ["https://*/*"]
   }
 }

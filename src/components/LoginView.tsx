@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import Cookies from "js-cookie";
 
 
 const LoginView = ({loginAction}) => {
@@ -16,10 +15,10 @@ const LoginView = ({loginAction}) => {
  
    const handleLogin = async () => {
     console.log('Button Clicked');
-
+    loginAction(true);
      try {
       console.log('1')
-       const response = await fetch("api.shadowsafe.xyz/authenticate", {
+       const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
          method: "POST",
          headers: {
            "Content-Type": "application/json",
@@ -30,16 +29,34 @@ const LoginView = ({loginAction}) => {
          }),
        });
        console.log('2')
+       console.log(response)
        if (response.ok) {
          const data = await response.json();
          const { token } = data.data;
          
          // Store the token as a cookie
          console.log('Authentication compelete saving cookie');
-         Cookies.set("token", token);
+         console.log('token value', token);
+         console.log(chrome.cookies)
+         chrome.cookies.set(
+          {
+            url: "http://shadowsafe.xyz", 
+            name: "authToken",
+            value: token,
+            domain: "shadowsafe.xyz", // Replace with the appropriate domain
+            path: "/", // Set the path as needed
+            secure: true, // Set to true for HTTPS
+            expirationDate: Math.floor(Date.now() / 1000) + 3600, // Set the expiration time (1 hour in this example)
+          },
+          (cookie) => {
+            if (chrome.runtime.lastError) {
+              console.error(chrome.runtime.lastError);
+            } else {
+              console.log("Cookie set successfully:", cookie);
+            }
+          }
+        );
 
-         loginAction(true)
-   
        } else {
          // Handle authentication error here (e.g., show an error message)
          console.error("Authentication failed");
