@@ -1,69 +1,84 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useInsertionEffect } from "react";
+import { SecureStorage } from "@plasmohq/storage/secure"
+import { Storage } from "@plasmohq/storage"
 
 
 const LoginView = ({loginAction}) => {
+
+  const storage = new Storage()
+  let usernameList 
+ 
 
   
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const [inputType, setInputType] = useState('password');
+   const [token, setToken] = useState("")
+
+
+
+      // async function saveToken(){
+
+      //   console.log(token,'token changed saving to secu storage');
+      //   await storage.set("token", token);
+          
+      // }
+
+      
 
    const togglePasswordVisibility = () => {
     setInputType(inputType === 'password' ? 'text' : 'password');
+    //usage:
+
   };
  
    const handleLogin = async () => {
     console.log('Button Clicked');
     loginAction(true);
-     try {
-      console.log('1')
-       const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-           userName: username,
-           password: password,
-         }),
-       });
-       console.log('2')
-       console.log(response)
-       if (response.ok) {
-         const data = await response.json();
-         const { token } = data.data;
-         
-         // Store the token as a cookie
-         console.log('Authentication compelete saving cookie');
-         console.log('token value', token);
-         console.log(chrome.cookies)
-         chrome.cookies.set(
-          {
-            url: "http://shadowsafe.xyz", 
-            name: "authToken",
-            value: token,
-            domain: "shadowsafe.xyz", // Replace with the appropriate domain
-            path: "/", // Set the path as needed
-            secure: true, // Set to true for HTTPS
-            expirationDate: Math.floor(Date.now() / 1000) + 3600, // Set the expiration time (1 hour in this example)
-          },
-          (cookie) => {
-            if (chrome.runtime.lastError) {
-              console.error(chrome.runtime.lastError);
-            } else {
-              console.log("Cookie set successfully:", cookie);
-            }
-          }
-        );
+    //  try {
+    //   console.log('1')
+    //    const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
+    //      method: "POST",
+    //      headers: {
+    //        "Content-Type": "application/json",
+    //      },
+    //      body: JSON.stringify({
+    //        userName: username,
+    //        password: password,
+    //      }),
+    //    });
+    //    if (response.ok) {
+    //      const data = await response.json();
+    //      const { token } = data.data;
+    //     //  console.log('Authentication compelete saving cookie');
+    //     //  console.log('token value', token);
+    //      setToken(token);
+    //      //await saveToken()
 
-       } else {
-         // Handle authentication error here (e.g., show an error message)
-         console.error("Authentication failed");
-       }
-     } catch (error) {
-       console.error("Error:", error);
-     }
+    //     // console.log(chrome.cookies)
+    //     //  chrome.cookies.set(
+    //     //   {
+    //     //     url: "http://shadowsafe.xyz", 
+    //     //     name: "authToken",
+    //     //     value: token,
+    //     //   },
+    //     //   (cookie) => {
+    //     //     if (chrome.runtime.lastError) {
+    //     //       console.error(chrome.runtime.lastError);
+    //     //     } else {
+    //     //       console.log("Cookie set successfully:", cookie);
+    //     //     }
+    //     //   }
+    //     // );
+
+    //    } else {
+    //      // Handle authentication error here (e.g., show an error message)
+    //      console.error("Authentication failed");
+    //    }
+    //  } catch (error) {
+    //    console.error("Error:", error);
+    //  }
    };
  
 

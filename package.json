@@ -10,6 +10,8 @@
     "test": "plasmo test"
   },
   "dependencies": {
+    "@plasmohq/messaging": "^0.5.0",
+    "@plasmohq/storage": "^1.8.0",
     "js-cookie": "^3.0.5",
     "plasmo": "0.83.0",
     "react": "18.2.0",
@@ -30,8 +32,20 @@
   },
   "manifest": {
     "permissions": [
-      "cookies"
-   ],
-    "host_permissions": ["https://*/*"]
+      "cookies",
+      "scripting",
+      "tabs",
+      "favicon",
+      "storage",
+      "contextMenus",
+      "clipboardRead",
+      "clipboardWrite",
+      "sessions",
+      "activeTab",
+      "webNavigation"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ]
   }
 }
