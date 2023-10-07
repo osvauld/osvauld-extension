@@ -1,84 +1,56 @@
 
 import React, { useState, useEffect, useInsertionEffect } from "react";
-import { SecureStorage } from "@plasmohq/storage/secure"
 import { Storage } from "@plasmohq/storage"
 
 
 const LoginView = ({loginAction}) => {
 
-  const storage = new Storage()
-  let usernameList 
- 
+   const storage = new Storage()
 
-  
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const [inputType, setInputType] = useState('password');
-   const [token, setToken] = useState("")
+   const [error, setError] = useState(false)
 
 
-
-      // async function saveToken(){
-
-      //   console.log(token,'token changed saving to secu storage');
-      //   await storage.set("token", token);
-          
-      // }
-
-      
+   async function saveToken(token){
+        console.log(token,'<== latest token');
+        await storage.set("token", token);   
+      }
 
    const togglePasswordVisibility = () => {
     setInputType(inputType === 'password' ? 'text' : 'password');
-    //usage:
-
-  };
+   };
  
    const handleLogin = async () => {
     console.log('Button Clicked');
-    loginAction(true);
-    //  try {
-    //   console.log('1')
-    //    const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
-    //      method: "POST",
-    //      headers: {
-    //        "Content-Type": "application/json",
-    //      },
-    //      body: JSON.stringify({
-    //        userName: username,
-    //        password: password,
-    //      }),
-    //    });
-    //    if (response.ok) {
-    //      const data = await response.json();
-    //      const { token } = data.data;
-    //     //  console.log('Authentication compelete saving cookie');
-    //     //  console.log('token value', token);
-    //      setToken(token);
-    //      //await saveToken()
 
-    //     // console.log(chrome.cookies)
-    //     //  chrome.cookies.set(
-    //     //   {
-    //     //     url: "http://shadowsafe.xyz", 
-    //     //     name: "authToken",
-    //     //     value: token,
-    //     //   },
-    //     //   (cookie) => {
-    //     //     if (chrome.runtime.lastError) {
-    //     //       console.error(chrome.runtime.lastError);
-    //     //     } else {
-    //     //       console.log("Cookie set successfully:", cookie);
-    //     //     }
-    //     //   }
-    //     // );
-
-    //    } else {
-    //      // Handle authentication error here (e.g., show an error message)
-    //      console.error("Authentication failed");
-    //    }
-    //  } catch (error) {
-    //    console.error("Error:", error);
-    //  }
+     try {
+       const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           userName: username,
+           password: password,
+         }),
+       });
+       if (response.ok) {
+         const data = await response.json();
+         const { token } = data.data;
+         await saveToken(token);
+         await storage.set("loginStatus", true);
+         loginAction(true);
+    
+       } else {
+         console.error("Authentication failed");
+         setError(true);
+       }
+     } catch (error) {
+       console.error("Error:", error);
+       setError(true);
+     }
    };
  
 
@@ -107,10 +79,16 @@ const LoginView = ({loginAction}) => {
             </svg>
           </div>
         </div>
+        {error && (
+        <div className="error-message">
+          <p>Authentication Failed!</p>
+        </div>
+      )}
       </div>
       <div className="button-section login-button">
         <button onClick={handleLogin}>Login</button>
       </div>
+  
     </div>
     )
   }

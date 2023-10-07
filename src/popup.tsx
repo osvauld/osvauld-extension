@@ -15,7 +15,6 @@ function IndexPopup() {
 
   let usernameList
   const storage = new Storage();
-
  let [loginStatus, setLoginStatus] = useState(false)
  let [credentialList, setCredentialList] = useState(false)
  let [credentialSelected, setCredentialSelected] = useState(false); 
@@ -32,13 +31,35 @@ function IndexPopup() {
     setLoginStatus(newValue)
   }
 
+
+  const closeAction = async () => {
+    await storage.set('token', null);
+    setLoginStatus(false);
+    await storage.set('loginStatus', null);
+    await storage.set('usernames', [])
+    console.log('removing token from storage');
+  }
+
+  
+  useEffect(()=>{
+    (async ()=>{
+     let loggedin = await storage.get('loginStatus');
+     console.log('Login status as seen from popup', loggedin);
+      if(loggedin){
+        setLoginStatus(loggedin);
+      }
+    })()  
+    },[])
+
+
   useEffect(()=>{
     (async ()=>{
       usernameList  = await storage.get('usernames');
       console.log('reading plasmo store as received in login', usernameList);
       if(usernameList.length > 0){
-        console.log('from popup, usernames found');
+        setLoginStatus(true);
         setCredentialList(true);
+        console.log('popup second useeffect', loginStatus, credentialList)
       }
     })()  
     },[])
@@ -58,7 +79,7 @@ function IndexPopup() {
           <span className="font-medium">safe</span>
           </h2>
           
-          <div className="close-icon pl-32" onClick={() => setLoginStatus(false)} >
+          <div className="close-icon pl-32" onClick={closeAction} >
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M23.6449 14.0494C24.1134 13.5808 24.1134 12.8199 23.6449 12.3514C23.1763 11.8829 22.4154 11.8829 21.9469 12.3514L18 16.302L14.0494 12.3551C13.5808 11.8866 12.8199 11.8866 12.3514 12.3551C11.8829 12.8237 11.8829 13.5846 12.3514 14.0531L16.302 18L12.3551 21.9506C11.8866 22.4192 11.8866 23.1801 12.3551 23.6486C12.8237 24.1171 13.5846 24.1171 14.0531 23.6486L18 19.698L21.9506 23.6449C22.4192 24.1134 23.1801 24.1134 23.6486 23.6449C24.1171 23.1763 24.1171 22.4154 23.6486 21.9469L19.698 18L23.6449 14.0494Z" fill="#828CAE"/>
             </svg>

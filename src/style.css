@@ -189,3 +189,16 @@ body {
 .login-button button:hover {
     background-color: #3A4468;
 }
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 0;
+}
+
+.error-message p {
+    color: red;
+    letter-spacing: 0.4px;
+}

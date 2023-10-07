@@ -1,16 +1,19 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
+import { Storage } from "@plasmohq/storage"
 
- 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
+
+           const storage = new Storage()
+           let code = await storage.get('token');
 
           const params =   new URLSearchParams({url: req.body.url})
           const url = 'https://api.shadowsafe.xyz/secrets?' + params ;
           const headers = {
-            'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NTAzZTYwNTkyMjYyMzI2NmZkMGM0MzciLCJhdXRoIjpbIkFkbWluIl0sImV4cCI6MTY5NzQwNTMyOH0.zvKKwYomWf8qiMegHfNdnkLsjs9EoTuliUaUf5IsBCErOtqfcVLC2m97riCHVivYcVdVVLv-mUYTowdt0M6q9Q'
+            'Authorization': 'Bearer '+code
           };
         
           try {
-          //  console.log('fetching usernames of url =>', url)
+           console.log('fetching usernames of url =>', url, "with token ", code)
             const response = await fetch(url, {
               method: 'GET',
               headers: headers
@@ -19,13 +22,12 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
             if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
-        
             const data = await response.json();
             res.send({data})
         
           } catch (error) {
             // Handle errors here
-            console.error('Error:', error);
+            console.log('Error/ No usernames associated with this active tab:', error);
           }
         }
   
