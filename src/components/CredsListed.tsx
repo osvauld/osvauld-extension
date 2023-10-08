@@ -9,15 +9,21 @@ type UserName = {
 type UserNames = Array<UserName>;
 
 const CredsListed = ({ updateCredentialSelected }) => {
+
+
   const [usernameList, setUsernameList] = useState<UserNames>();
-  const changeCredentialSelected = () => {
+
+
+  const changeCredentialSelected = async (index) => {
     updateCredentialSelected(true);
+    await storage.set('usernameIndex',index )
   };
 
   const storage = new Storage();
 
   useEffect(() => {
     (async () => {
+      
       const list: UserNames = await storage.get("usernames");
       console.log("reading plasmo store as received in credsListed", list);
       if (list.length > 0) {
@@ -40,7 +46,7 @@ const CredsListed = ({ updateCredentialSelected }) => {
             return (
               <div className="list-item">
                 <p key={index}>{user.username}</p>
-                <div className="icon-enter" onClick={changeCredentialSelected}>
+                <div className="icon-enter" onClick={()=>changeCredentialSelected(index)}>
                   <svg
                     width="16"
                     height="16"

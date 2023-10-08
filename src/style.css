@@ -140,6 +140,13 @@ body {
     color: #828CAE;
 }
 
+.cred-section svg {
+   transition: scale 0.15s ease;
+}
+.cred-section svg:hover{
+    scale: 1.06;
+}
+
 .username, .password {
     width: 100%;
     border: 1px solid #828CAE;

@@ -8,9 +8,9 @@ async function testBaseStorage(usernames) {
   const storage = new Storage();
   await storage.remove("usernames");
   await storage.set("usernames", usernames);
-  console.log("it is set now");
+
   let read = await storage.get("usernames");
-  console.log("reading now from storage", read);
+  console.log('Set usernames', read )
 }
 
 async function fetchUrls() {
@@ -18,7 +18,7 @@ async function fetchUrls() {
   const url = "https://api.shadowsafe.xyz/secrets/urls";
   const token = "Bearer " + code;
 
-  console.log("fetching concerned urls with", token);
+  
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -35,7 +35,7 @@ async function fetchUrls() {
 
     if (data.statusCode === 200 && data.status === "Success") {
       const urlsArray = data.data.urls;
-      console.log("URLs:", urlsArray);
+      
       return urlsArray;
     } else {
       console.error("Request failed:", data.message);
@@ -46,6 +46,7 @@ async function fetchUrls() {
 }
 
 const usernamefetch = async (requesturl) => {
+  console.log('Fetching usernames trigger: onActivated');
   let code = await storage.get("token");
   const params = new URLSearchParams({ url: requesturl });
   const url = "https://api.shadowsafe.xyz/secrets?" + params;
@@ -73,13 +74,10 @@ const usernamefetch = async (requesturl) => {
 
 chrome.tabs.onActivated.addListener(function (activeInfo) {
   chrome.tabs.get(activeInfo.tabId, function (tab) {
-    console.log("active tab:", tab.url);
     const justHostname = new URL(tab.url).hostname;
-    console.log("url of interest", concernedUrls, justHostname);
     if (concernedUrls.includes(justHostname)) {
       (async () => {
         let usernames = await usernamefetch(justHostname);
-
         await testBaseStorage(usernames.data.secrets);
       })();
     }
@@ -91,7 +89,18 @@ let concernedUrls;
 async function main() {
   try {
     concernedUrls = await fetchUrls();
-    console.log("Concerned URLs:", concernedUrls);
+    let activeUrl = await chrome.tabs.query({ active: true});
+    console.log('Fetching usernames trigger: Login, active tab')
+    const storage = new Storage();
+    console.log(activeUrl)
+    let hostname = new URL(activeUrl[0].url).hostname;
+    if (concernedUrls.includes(hostname)) {
+      (async () => {
+        let usernames = await usernamefetch(hostname);
+        await testBaseStorage(usernames.data.secrets);
+      })();
+    }
+    
   } catch (error) {
     console.error("Error:", error);
   }
@@ -100,11 +109,11 @@ async function main() {
 let loginStatus;
 
 let intervalId = setInterval(() => {
-  console.log("Listening for login");
+  
   (async () => {
     loginStatus = await storage.get("loginStatus");
     if (loginStatus) {
-      console.log("Logged in");
+      
       main();
       clearInterval(intervalId);
     }

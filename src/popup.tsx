@@ -47,17 +47,15 @@ function IndexPopup() {
   }, []);
 
   const getUserNames = async () => {
-    console.log("get usernames called");
-
     usernameList = await storage.get("usernames");
+    console.log('Setting credential list true from popup after login based on', usernameList)
     if (usernameList.length > 0) {
       setCredentialList(true);
     }
   };
 
   const fetchUsername = async () => {
-    console.log("inside fetchUsername");
-
+    console.log("Fetching useranmes : trigger login button")
     let hostname = "google";
     const usernames = await sendToBackground({
       name: "fetchUsernames",
@@ -68,7 +66,7 @@ function IndexPopup() {
 
     const storage = new Storage();
     await storage.set("usernames", usernames.data.data.secrets);
-
+    
     getUserNames();
   };
 

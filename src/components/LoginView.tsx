@@ -10,7 +10,6 @@ const LoginView = ({ loginAction }) => {
   const [error, setError] = useState(false);
 
   async function saveToken(token) {
-    console.log(token, "<== latest token");
     await storage.set("token", token);
   }
 
@@ -19,8 +18,6 @@ const LoginView = ({ loginAction }) => {
   };
 
   const handleLogin = async () => {
-    console.log("Button Clicked");
-
     try {
       const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
         method: "POST",
