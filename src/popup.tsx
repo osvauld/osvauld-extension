@@ -33,13 +33,13 @@ function IndexPopup() {
     await storage.set("loginStatus", null);
     setLoginStatus(false);
     await storage.remove("usernames");
+    setCredentialList(false);
     console.log("removing token from storage");
   };
 
   useEffect(() => {
     (async () => {
       let loggedin: boolean = await storage.get("loginStatus");
-      console.log("Login status as seen from popup", loggedin);
       if (loggedin) {
         setLoginStatus(loggedin);
       }
@@ -47,15 +47,16 @@ function IndexPopup() {
   }, []);
 
   const getUserNames = async () => {
+
     usernameList = await storage.get("usernames");
-    console.log('Setting credential list true from popup after login based on', usernameList)
+
     if (usernameList.length > 0) {
       setCredentialList(true);
     }
   };
 
   const fetchUsername = async () => {
-    console.log("Fetching useranmes : trigger login button")
+ 
     let hostname = "google";
     const usernames = await sendToBackground({
       name: "fetchUsernames",
@@ -63,16 +64,19 @@ function IndexPopup() {
         url: hostname,
       },
     });
-
-    const storage = new Storage();
+    console.log('usernames fetchUsernames response', usernames);
     await storage.set("usernames", usernames.data.data.secrets);
-    
-    getUserNames();
+  
+    await getUserNames();
   };
 
   useEffect(() => {
-    if (loginStatus) fetchUsername();
+    (async ()=> {
+   
+      if (loginStatus) await fetchUsername();
+    })()
   }, [loginStatus]);
+
 
   return (
     <div className="w-400 h-380 flex flex-col justify-around items-center bg-[#262C44]">

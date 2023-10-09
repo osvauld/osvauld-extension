@@ -112,6 +112,7 @@ let intervalId = setInterval(() => {
   
   (async () => {
     loginStatus = await storage.get("loginStatus");
+    console.log('listening for login')
     if (loginStatus) {
       
       main();

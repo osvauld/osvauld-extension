@@ -23,7 +23,6 @@ const CredsListed = ({ updateCredentialSelected }) => {
 
   useEffect(() => {
     (async () => {
-      
       const list: UserNames = await storage.get("usernames");
       console.log("reading plasmo store as received in credsListed", list);
       if (list.length > 0) {
