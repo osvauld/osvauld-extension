@@ -1,15 +1,16 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging";
 import { Storage } from "@plasmohq/storage";
 
-const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-  let activeUrl = await chrome.tabs.query({ active: true});
 
+const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
+  
   const storage = new Storage();
   let code = await storage.get("token");
-  let hostname = new URL(activeUrl[0].url).hostname;
-  const params = new URLSearchParams({ url: hostname });
+  let id = req.body.id;
+  const params = new URLSearchParams({ id: id });
 
-  const url = "https://api.shadowsafe.xyz/secretsByUrl?" + params;
+
+  const url = "https://api.shadowsafe.xyz/secretsById?" + params;
   const headers = {
     Authorization: "Bearer " + code,
   };
@@ -25,11 +26,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     }
     
     const data = await response.json();
-    console.log('New Username Response 2', data)
     res.send({ data });
 
   } catch (error) {
-    console.log("No usernames associated with this active tab:", error);
+    console.log("We got an error:", error);
   }
 };
 

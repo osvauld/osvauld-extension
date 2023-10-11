@@ -64,7 +64,6 @@ function IndexPopup() {
         url: hostname,
       },
     });
-    console.log('usernames fetchUsernames response', usernames);
     await storage.set("usernames", usernames.data.data.secrets);
   
     await getUserNames();

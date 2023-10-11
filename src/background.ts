@@ -49,7 +49,7 @@ const usernamefetch = async (requesturl) => {
   console.log('Fetching usernames trigger: onActivated');
   let code = await storage.get("token");
   const params = new URLSearchParams({ url: requesturl });
-  const url = "https://api.shadowsafe.xyz/secrets?" + params;
+  const url = "https://api.shadowsafe.xyz/secretsByUrl?" + params;
   const headers = {
     Authorization: "Bearer " + code,
   };
@@ -63,11 +63,11 @@ const usernamefetch = async (requesturl) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
     const data = await response.json();
+
     return data;
   } catch (error) {
-    // Handle errors here
+  
     console.error("Error:", error);
   }
 };

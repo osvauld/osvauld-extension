@@ -2,12 +2,14 @@
 
 import { Storage } from "@plasmohq/storage";
 import React, { useState, useEffect, useRef } from "react";
+import { sendToBackground, type PlasmoMessaging } from "@plasmohq/messaging";
 
 const CredView = ({chageToList}) => {
 
-    const [selectedUsername, setSelectedUsername] = useState()
+    const [selectedUsername, setSelectedUsername] = useState();
+    const [secret, setSecret] = useState();
     const [copied, setCopied] = useState(false);
-    const [copied1, setCopied1] = useState(false)
+    const [copied1, setCopied1] = useState(false);
 
     const storage = new Storage();
 
@@ -31,9 +33,19 @@ const CredView = ({chageToList}) => {
       (async () => {
         const list: UserNames = await storage.get("usernames");
         const selectedIndex = await storage.get("usernameIndex");
-        setSelectedUsername(list[selectedIndex].username) 
+        let usernameId = list[selectedIndex].secretId;
+        const secret = await sendToBackground({
+          name: "fetchSecret",
+          body: {
+            id: usernameId,
+          },
+        });
+       
+        setSecret(secret.data.data.password);
+        setSelectedUsername(list[selectedIndex].username);
       })();
     }, []);
+
 
     const listUpdater =() => {
       chageToList(false)
@@ -43,7 +55,6 @@ const CredView = ({chageToList}) => {
     const passToCopyRef = useRef(null);
   
     const copyToClipboard = (reference) => {
-      console.log('copy clipbord function invoked', reference.current.innerText);
       navigator.clipboard.writeText( reference.current.innerText);
       setCopied(true);
       setTimeout(()=> {
@@ -52,7 +63,6 @@ const CredView = ({chageToList}) => {
     };
 
     const copyToClipboard1 = (reference) => {
-      console.log('copy clipbord function invoked', reference.current.innerText);
       navigator.clipboard.writeText( reference.current.innerText);
       setCopied1(true);
       setTimeout(()=> {
@@ -77,7 +87,7 @@ const CredView = ({chageToList}) => {
                     </div>
                     <h3>Password</h3>
                     <div className="password">
-                      <p ref={passToCopyRef}> ********************** </p>
+                      <p ref={passToCopyRef}> {secret}</p>
                       <div className="copy" onClick={()=> copyToClipboard1(passToCopyRef)}>
                       {copied1 ? (svg2):(svg1)}
                         </div>
