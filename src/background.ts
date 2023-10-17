@@ -5,7 +5,7 @@ const storage = new Storage();
 // This the part were we listen for new Urls visited and compated with the urls we have on our array, If there is a match, url is sent to the backed to fetch Usernames.
 
 async function testBaseStorage(usernames) {
-  const storage = new Storage();
+ 
   await storage.remove("usernames");
   await storage.set("usernames", usernames);
 
@@ -75,8 +75,11 @@ const usernamefetch = async (requesturl) => {
 chrome.tabs.onActivated.addListener(function (activeInfo) {
   chrome.tabs.get(activeInfo.tabId, function (tab) {
     const justHostname = new URL(tab.url).hostname;
-    if (concernedUrls.includes(justHostname)) {
-      (async () => {
+      const subdomainPattern = /^([a-z0-9-]+\.)*[a-z0-9-]+\.[a-z]+$/;
+      console.log('current hostname', justHostname)
+      if (subdomainPattern.test(justHostname)){
+        (async () => {
+        console.log(justHostname, "we need this url our target");
         let usernames = await usernamefetch(justHostname);
         await testBaseStorage(usernames.data.secrets);
       })();
@@ -89,6 +92,7 @@ let concernedUrls;
 async function main() {
   try {
     concernedUrls = await fetchUrls();
+    console.log('Concered URLs ==> ',    concernedUrls)
     let activeUrl = await chrome.tabs.query({ active: true});
     console.log('Fetching usernames trigger: Login, active tab')
     const storage = new Storage();
@@ -114,7 +118,6 @@ let intervalId = setInterval(() => {
     loginStatus = await storage.get("loginStatus");
     console.log('listening for login')
     if (loginStatus) {
-      
       main();
       clearInterval(intervalId);
     }

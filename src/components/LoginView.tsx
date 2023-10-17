@@ -18,7 +18,6 @@ const LoginView = ({ loginAction }) => {
   };
 
   const handleLogin = async () => {
-    console.log("1");
     try {
       const response = await fetch("https://api.shadowsafe.xyz/authenticate", {
         method: "POST",

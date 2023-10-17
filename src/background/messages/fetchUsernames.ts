@@ -25,7 +25,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     }
     
     const data = await response.json();
-    console.log('New Username Response 2', data)
     res.send({ data });
 
   } catch (error) {

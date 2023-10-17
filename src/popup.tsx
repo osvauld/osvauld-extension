@@ -34,6 +34,7 @@ function IndexPopup() {
     setLoginStatus(false);
     await storage.remove("usernames");
     setCredentialList(false);
+    setCredentialSelected(false);
     console.log("removing token from storage");
   };
 
@@ -47,9 +48,7 @@ function IndexPopup() {
   }, []);
 
   const getUserNames = async () => {
-
     usernameList = await storage.get("usernames");
-
     if (usernameList.length > 0) {
       setCredentialList(true);
     }
@@ -71,7 +70,16 @@ function IndexPopup() {
 
   useEffect(() => {
     (async ()=> {
-   
+     await sendToBackground({
+          name: "fetchUrlTargets",
+        });
+    })()
+  },[])
+
+
+  useEffect(() => {
+    (async ()=> {
+ 
       if (loginStatus) await fetchUsername();
     })()
   }, [loginStatus]);
