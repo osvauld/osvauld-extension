@@ -34,18 +34,42 @@ const CredsListed = ({ updateCredentialSelected }) => {
     })();
   }, []);
 
+  
+
   return (
     <div className="home-container">
-      <div className="heading">
-        <h2>Secrets</h2>
+      <div className="generic-search-container">
+         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path d="M14.3495 14.3578C14.2562 14.4497 14.1305 14.5013 13.9995 14.5016C13.8667 14.501 13.7392 14.4496 13.6432 14.3578L10.9432 11.6516C9.8061 12.6067 8.34413 13.0859 6.86224 12.9894C5.38034 12.8928 3.99294 12.2278 2.98939 11.1332C1.98584 10.0386 1.44363 8.59876 1.47584 7.11407C1.50806 5.62938 2.1122 4.21444 3.16229 3.16436C4.21237 2.11428 5.6273 1.51013 7.11199 1.47792C8.59668 1.44571 10.0365 1.98792 11.1311 2.99147C12.2258 3.99502 12.8907 5.38242 12.9873 6.86431C13.0839 8.34621 12.6046 9.80818 11.6495 10.9453L14.3495 13.6453C14.3967 13.6918 14.4342 13.7473 14.4599 13.8085C14.4855 13.8696 14.4986 13.9353 14.4986 14.0016C14.4986 14.0679 14.4855 14.1335 14.4599 14.1947C14.4342 14.2558 14.3967 14.3113 14.3495 14.3578ZM7.24949 12.0016C8.18895 12.0016 9.10731 11.723 9.88844 11.201C10.6696 10.6791 11.2784 9.93726 11.6379 9.06931C11.9974 8.20136 12.0915 7.24629 11.9082 6.32488C11.7249 5.40347 11.2725 4.5571 10.6082 3.8928C9.94394 3.22851 9.09757 2.77611 8.17617 2.59283C7.25476 2.40955 6.29969 2.50362 5.43174 2.86313C4.56379 3.22265 3.82194 3.83147 3.30001 4.6126C2.77807 5.39374 2.49949 6.3121 2.49949 7.25156C2.50114 8.51083 3.00212 9.71805 3.89256 10.6085C4.783 11.4989 5.99022 11.9999 7.24949 12.0016Z" fill="#828CAE"/>
+         </svg>
+        <input type="text" placeholder="Find Secrets, Folders, Groups and People" className="generic-search"/>
       </div>
+      <h2 className="domain-of-interest">osvauld.com</h2>
+      <ul className="tags">
+        <li className="selected"> <span>Login</span>
+        </li>
+        <li> <span>SSH</span> </li>
+        <li><span>IP</span></li>
+      </ul>
+      <div className="heading">
+        <h2>Credentials</h2>
+      </div>
+      <div className="list-container">
       {usernameList &&
         usernameList.map((user, index) => {
           {
             return (
-              <div className="list-item">
-                <p key={index}>{user.username}</p>
-                <div className="icon-enter" onClick={()=>changeCredentialSelected(index)}>
+              <ul className="list-item">
+                <div className="individual-item">
+                  <div className="left-section">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="12" fill="#4C598B" fill-opacity="0.2"/>
+                      <path d="M16.7778 17.9987V16.7765C16.7778 16.1282 16.5202 15.5064 16.0618 15.048C15.6034 14.5896 14.9816 14.332 14.3333 14.332H9.44444C8.79614 14.332 8.17438 14.5896 7.71596 15.048C7.25754 15.5064 7 16.1282 7 16.7765V17.9987" stroke="white" stroke-width="1.22222" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M11.8888 11.8889C13.2388 11.8889 14.3332 10.7945 14.3332 9.44444C14.3332 8.09441 13.2388 7 11.8888 7C10.5388 7 9.44434 8.09441 9.44434 9.44444C9.44434 10.7945 10.5388 11.8889 11.8888 11.8889Z" stroke="white" stroke-width="1.22222" stroke-linecap="round" stroke-linejoin="round"/>
+                   </svg>
+                   <li key={index}>{user.username}</li>
+                   </div>
+                   <div className="icon-enter" onClick={()=>changeCredentialSelected(index)}>
                   <svg
                     width="16"
                     height="16"
@@ -58,11 +82,13 @@ const CredsListed = ({ updateCredentialSelected }) => {
                       fill="#828CAE"
                     />
                   </svg>
+                   </div>
                 </div>
-              </div>
+              </ul>
             );
           }
         })}
+      </div>
     </div>
   );
 };

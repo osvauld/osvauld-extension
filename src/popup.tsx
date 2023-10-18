@@ -8,6 +8,7 @@ import CredsListed from "./components/CredsListed";
 
 import "./style.css";
 import { sendToBackground, type PlasmoMessaging } from "@plasmohq/messaging";
+import { spawn } from "child_process";
 
 function IndexPopup() {
   let usernameList;
@@ -87,7 +88,8 @@ function IndexPopup() {
 
   return (
     <div className="w-400 h-380 flex flex-col justify-around items-center bg-[#262C44]">
-      <div className="name-with-icon w-11/12 flex self-center pl-4">
+      <div className="name-with-icon w-11/12 flex self-center">
+        <div className="osvauld-logo">
         <svg
           width="36"
           height="36"
@@ -102,13 +104,16 @@ function IndexPopup() {
             fill="#E4E6ED"
           />
         </svg>
-
-        <h2 className="text-white font-normal text-2xl pl-2 cursor-pointer">
+        </div>
+        <h2 className="text-white font-normal text-lg pl-2 mt-1 cursor-pointer">
           shadow
-          <span className="font-medium">safe</span>
+          <span className="font-medium" onClick={closeAction} >safe</span>
         </h2>
-
-        <div className="close-icon pl-32" onClick={closeAction}>
+        {loginStatus ? (<span className="primary-addsecret ml-44">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.07692 2.07692C9.07692 1.48125 8.59567 1 8 1C7.40433 1 6.92308 1.48125 6.92308 2.07692V6.92308H2.07692C1.48125 6.92308 1 7.40433 1 8C1 8.59567 1.48125 9.07692 2.07692 9.07692H6.92308V13.9231C6.92308 14.5188 7.40433 15 8 15C8.59567 15 9.07692 14.5188 9.07692 13.9231V9.07692H13.9231C14.5188 9.07692 15 8.59567 15 8C15 7.40433 14.5188 6.92308 13.9231 6.92308H9.07692V2.07692Z" fill="white"/>
+        </svg>
+        </span>): (  <div className="close-icon ml-40" >
           <svg
             width="36"
             height="36"
@@ -121,9 +126,10 @@ function IndexPopup() {
               fill="#828CAE"
             />
           </svg>
-        </div>
+        </div>)}
+      
       </div>
-      <div className="body w-11/12 h-4/6">
+      <div className="body w-11/12 h-5/6">
         {loginStatus ? (
           credentialList ? (
             credentialSelected ? (
