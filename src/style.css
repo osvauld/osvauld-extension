@@ -144,15 +144,16 @@ input::-webkit-input-placeholder{
     margin-left: 20px;
 }
 
-.left-section svg {
+.left-section .key-icon {
     margin-right: 10px;
     width: 24px;
     height: 24px;
+    color: #828CAE;
 }
 
 
 .list-item > .individual-item:hover {
-  background-color: antiquewhite;
+  background-color: #3A4468;
 }
 
 .list-item .icon-enter {
@@ -180,13 +181,13 @@ input::-webkit-input-placeholder{
 
 
 .back-section {
+    margin-top: 60px;
     width: 90%;
-    height: 20%;
-    transition: scale 0.15s ease-in;
+    transition: scale 0.2s ease-in;
 }
 
 .back-section svg:hover {
-    scale: 1.4;
+    scale: 1.2;
 }
 
 
@@ -199,6 +200,7 @@ input::-webkit-input-placeholder{
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    padding-bottom: 0;
 }
 
 .cred-section h3 {
@@ -212,7 +214,7 @@ input::-webkit-input-placeholder{
     font-size: small;
     font-weight: normal;
     margin: 5px 0;
-    color: #828CAE;
+    color: white;
 }
 
 .cred-section svg {
@@ -229,7 +231,7 @@ input::-webkit-input-placeholder{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
     height: 40px;
     background-color: #2E3654;
     margin-bottom: 5px;
@@ -274,7 +276,7 @@ input::-webkit-input-placeholder{
 }
 
 
-.login-button button:hover {
+.button-section  button:hover {
     background-color: #3A4468;
 }
 

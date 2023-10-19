@@ -5,7 +5,7 @@ const EmptyCreds = () => {
         It seems all empty here! <br />
         Create your secret passwords and credentials.
       </p>
-      <button className="bg-[#4E46DC] px-10 py-2 rounded-3xl text-white text-sm ml-4 ">Add Secret</button>
+      {/* <button className="bg-[#4E46DC] px-10 py-2 rounded-3xl text-white text-sm ml-4 ">Add Secret</button> */}
     </div>
   );
 };

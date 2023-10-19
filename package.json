@@ -10,6 +10,7 @@
     "test": "plasmo test"
   },
   "dependencies": {
+    "@iconify/react": "^4.1.1",
     "@plasmohq/messaging": "^0.5.0",
     "@plasmohq/storage": "^1.8.0",
     "js-cookie": "^3.0.5",
