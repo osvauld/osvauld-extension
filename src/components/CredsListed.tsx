@@ -11,6 +11,7 @@ type UserNames = Array<UserName>;
 
 const CredsListed = ({ updateCredentialSelected }) => {
   const [usernameList, setUsernameList] = useState<UserNames>();
+  const [activeTab, setActiveTab] = useState("");
 
   const changeCredentialSelected = async (index) => {
     updateCredentialSelected(true);
@@ -18,6 +19,13 @@ const CredsListed = ({ updateCredentialSelected }) => {
   };
 
   const storage = new Storage();
+
+  useEffect(() => {
+    (async () => {
+      let activeUrl = await chrome.tabs.query({ active: true });
+      setActiveTab(new URL(activeUrl[0].url).hostname);
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -53,8 +61,8 @@ const CredsListed = ({ updateCredentialSelected }) => {
           className="generic-search"
         />
       </div>
-      <h2 className="domain-of-interest">osvauld.com</h2>
-      <ul className="tags">
+      <h2 className="domain-of-interest">{activeTab}</h2>
+      {/* <ul className="tags">
         <li className="selected">
           {" "}
           <span>Login</span>
@@ -66,7 +74,7 @@ const CredsListed = ({ updateCredentialSelected }) => {
         <li>
           <span>IP</span>
         </li>
-      </ul>
+      </ul> */}
       <div className="heading">
         <h2>Credentials</h2>
       </div>

@@ -29,7 +29,8 @@ body {
     height: 24px;
     border-radius: 25px;
     margin-top: 10px;
-
+    color: white;
+    font-weight: bolder;
 }
 .home-container {
     background-color: #262C44;
@@ -105,8 +106,7 @@ input::-webkit-input-placeholder{
 }
 
 .list-container {
-    min-height: 100px;
-    height: 150px;
+    min-height: 200px;
     background-color: #2E3654;
     border-radius: 5px;
 }
