@@ -52,6 +52,7 @@ function IndexPopup() {
 
   const nextPage = (newValue) => {
     setFolderSelect(newValue);
+    console.log(2, folderSelect);
   };
 
   const closeAction = async () => {
@@ -62,6 +63,7 @@ function IndexPopup() {
     setCredentialList(false);
     setCredentialSelected(false);
     setAddingSecret(false);
+    setFolderSelect(false);
     console.log("removing token from storage");
   };
 
@@ -126,16 +128,19 @@ function IndexPopup() {
       return <LoginView loginAction={loginAction} />;
     }
     if (!credentialList) {
-      if (addingSecret && folderSelect) {
-        return <FolderSelect />;
-      } else if (folderSelect) {
-        return <AddSecret />;
-      } else {
-        return <EmptyCreds />;
+      if (addingSecret) {
+        if (folderSelect) {
+          return <FolderSelect />;
+        }
+        return <AddSecret nextPage={nextPage} />;
       }
+      return <EmptyCreds />;
     }
     if (addingSecret) {
-      return <AddSecret />;
+      if (folderSelect) {
+        return <FolderSelect />;
+      }
+      return <AddSecret nextPage={nextPage} />;
     }
     if (credentialSelected) {
       return <CredView chageToList={chageToList} />;
