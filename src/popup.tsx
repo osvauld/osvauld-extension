@@ -52,7 +52,6 @@ function IndexPopup() {
 
   const nextPage = (newValue) => {
     setFolderSelect(newValue);
-    console.log(2, folderSelect);
   };
 
   const onHomeClick = () => {
@@ -103,7 +102,6 @@ function IndexPopup() {
       },
     });
     await storage.set("usernames", usernames.data.data.secrets);
-
     await getUserNames();
   };
 
@@ -162,18 +160,17 @@ function IndexPopup() {
   };
 
   return (
-    <div className="w-400 h-380 flex flex-col justify-around items-center bg-[#262C44]">
+    <div className="w-[380px] h-[520px] flex flex-col justify-around items-center bg-[#262C44]">
       <div className="name-with-icon w-11/12 flex self-center">
-        <div className="osvauld-logo">{osvauld}</div>
+        {loginStatus && <div className="osvauld-logo">{osvauld}</div>}
         <h2 className="text-white font-normal text-lg pl-2 mt-1 cursor-pointer">
-          shadow
           <span className="font-medium" onClick={closeAction}>
-            safe
+            Osvauld
           </span>
         </h2>
         {loginStatus && (
           <span
-            className="primary-addsecret ml-44 hover:bg-[#3A4468] transition ease-in cursor-pointer "
+            className="primary-addsecret ml-auto hover:bg-[#3A4468] mt-0 transition ease-in cursor-pointer "
             onClick={callAddingSecret}
           >
             <Icon icon="mingcute:add-fill" className="text-lg" />
