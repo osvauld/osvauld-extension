@@ -3,15 +3,18 @@ import { SecureStorage } from "@plasmohq/storage/secure";
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
-const AddSecret = ({ nextPage }) => {
+const AddSecret = (props) => {
   const [activeTab, setActiveTab] = useState("");
   const [saver, setSaver] = useState(false);
   const [data, setData] = useState([]);
   const [urlInput, setUrlInput] = useState("");
 
+  const listUpdater = () => {
+    props.backdown(false);
+  };
+
   const handleChange = (e) => {
     const { name, value, checked = false, type } = e.target;
-
     const index = data.findIndex((obj) => obj.fieldKey === name);
     if (index === -1) {
       setData([
@@ -49,7 +52,7 @@ const AddSecret = ({ nextPage }) => {
   };
 
   const callNextPage = async () => {
-    nextPage(true);
+    props.nextPage(true);
     setSaver(true);
   };
 
@@ -81,7 +84,10 @@ const AddSecret = ({ nextPage }) => {
 
   return (
     <div className="h-full w-full bg-[#2E3654] rounded-md p-3 pb-1 box-border">
-      <div className="h-full">
+      <div className="back-section !mt-0 !ml-1 !mb-1 " onClick={listUpdater}>
+        <Icon icon="ion:arrow-back-outline" className="text-[#828CAE]" />
+      </div>
+      <div className="h-auto">
         <div className="h-1/6">
           <label className=" h-4/12 text-[#828CAE]">URL</label>
           <input
@@ -91,7 +97,7 @@ const AddSecret = ({ nextPage }) => {
             onChange={changingUrl}
           />
         </div>
-        <div className="h-1/6">
+        <div className="h-1/6 mt-2">
           <label className="text-[#828CAE] h-4/12">Username</label>
           <div className="w-full h-ful">
             <input
@@ -140,6 +146,7 @@ const AddSecret = ({ nextPage }) => {
                 type="checkbox"
                 className="sr-only peer"
                 name="Password"
+                value=""
                 checked={
                   data.find((obj) => obj.fieldKey === "Password")?.sensitive ||
                   false
@@ -150,7 +157,7 @@ const AddSecret = ({ nextPage }) => {
             </label>
           </div>
         </div>
-        <div className="h-[27%] mt-2 mb-1">
+        <div className="h-[90px] mt-6 mb-1">
           {/* <div className=" h-4/12 flex justify-center items-center bg-[#3A4468] border border-dashed rounded-lg border-[#4C598B] mb-2">
                         <button className="">
                             <Icon icon="ic:round-add" className="text-[#828CAE] text-xl" /> 

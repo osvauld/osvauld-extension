@@ -14,7 +14,13 @@ import "./style.css";
 import { sendToBackground, type PlasmoMessaging } from "@plasmohq/messaging";
 
 let osvauld = (
-  <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="36"
+    height="36"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -58,6 +64,9 @@ function IndexPopup() {
     setFolderSelect(false);
     setAddingSecret(false);
     setCreateSuccess(false);
+  };
+  const backdown = (newValue) => {
+    setAddingSecret(newValue);
   };
 
   const closeAction = async () => {
@@ -128,6 +137,7 @@ function IndexPopup() {
     loginAction,
     nextPage,
     updateCreateSuccess,
+    backdown,
   }) => {
     if (!loginStatus) {
       return <LoginView loginAction={loginAction} />;
@@ -140,7 +150,7 @@ function IndexPopup() {
           }
           return <FolderSelect updateCreateSuccess={updateCreateSuccess} />;
         }
-        return <AddSecret nextPage={nextPage} />;
+        return <AddSecret nextPage={nextPage} backdown={backdown} />;
       }
       return <EmptyCreds />;
     }
@@ -151,7 +161,7 @@ function IndexPopup() {
         }
         return <FolderSelect updateCreateSuccess={updateCreateSuccess} />;
       }
-      return <AddSecret nextPage={nextPage} />;
+      return <AddSecret nextPage={nextPage} backdown={backdown} />;
     }
     if (credentialSelected) {
       return <CredView chageToList={chageToList} />;
@@ -164,8 +174,9 @@ function IndexPopup() {
       <div className="name-with-icon w-11/12 flex self-center">
         {loginStatus && <div className="osvauld-logo">{osvauld}</div>}
         <h2 className="text-white font-normal text-lg pl-2 mt-1 cursor-pointer">
+          shadow
           <span className="font-medium" onClick={closeAction}>
-            Osvauld
+            safe
           </span>
         </h2>
         {loginStatus && (
@@ -187,6 +198,7 @@ function IndexPopup() {
           loginAction={loginAction}
           nextPage={nextPage}
           updateCreateSuccess={updateCreateSuccess}
+          backdown={backdown}
         />
       </div>
     </div>
