@@ -84,12 +84,12 @@ const AddSecret = (props) => {
 
   return (
     <div className="h-full w-full bg-[#2E3654] rounded-md p-3 pb-1 box-border">
-      <div className="back-section !mt-0 !ml-1 !mb-1 " onClick={listUpdater}>
+      <div className="back-section !mt-0 !ml-1 !mb-3 " onClick={listUpdater}>
         <Icon icon="ion:arrow-back-outline" className="text-[#828CAE]" />
       </div>
       <div className="h-auto">
         <div className="h-1/6">
-          <label className=" h-4/12 text-[#828CAE]">URL</label>
+          <label className=" h-4/12 text-[#828CAE] ml-4">URL</label>
           <input
             type="text"
             className="w-full bg-[#2E3654] text-base pl-4 py-1 text-white border border-[#4C598B] rounded-3xl focus:outline-none"
@@ -98,7 +98,7 @@ const AddSecret = (props) => {
           />
         </div>
         <div className="h-1/6 mt-2">
-          <label className="text-[#828CAE] h-4/12">Username</label>
+          <label className="text-[#828CAE] h-4/12 ml-4">Username</label>
           <div className="w-full h-ful">
             <input
               type="text"
@@ -128,7 +128,7 @@ const AddSecret = (props) => {
           </div>
         </div>
         <div className="h-1/6 mt-3">
-          <label className="text-[#828CAE] h-1/3">Password</label>
+          <label className="text-[#828CAE] h-1/3 ml-4">Password</label>
           <div className="w-full h-4/12">
             <input
               type="text"
