@@ -26,9 +26,8 @@ body {
     align-items: center;
     padding: 10px;
     width: 50px;
-    height: 24px;
+    height: 30px;
     border-radius: 25px;
-    margin-top: 10px;
     color: white;
     font-weight: bolder;
 }
@@ -40,7 +39,7 @@ body {
 .generic-search-container > svg {
     margin-right: 10px;
 }
-.generic-search-container{
+.generic-search-container {
     width: 100%;
     height: 30px;
     background-color: #2E3654;
@@ -54,10 +53,12 @@ body {
 .generic-search {
     width: 90%;
     background-color: #2E3654;
+    outline: none;
+    color: white;
 }
 
 input::-webkit-input-placeholder{
-    color: rgba(130, 140, 174, 1);
+    color: rgba(130, 140, 174, 0.6);
 }
 
 .domain-of-interest {
@@ -106,18 +107,21 @@ input::-webkit-input-placeholder{
 }
 
 .list-container {
-    min-height: 200px;
-    background-color: #2E3654;
+    height: 200px;
+    background-color:  #262C44;
     border-radius: 5px;
+    overflow-y: scroll;
 }
 
 .list-item {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     font-size: medium;
     font-weight:lighter;
     color: white;
+  
 }
 
 .list-item .individual-item:first-of-type {
@@ -163,6 +167,20 @@ input::-webkit-input-placeholder{
     align-items: center;
 }
 
+.mock-logo {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mock-logo svg {
+    width: 90px;
+    height: 90px;
+}
+
 
 
 .cred-container {
@@ -182,8 +200,14 @@ input::-webkit-input-placeholder{
 
 .back-section {
     margin-top: 60px;
+    margin-left: 20px;
     width: 90%;
-    transition: scale 0.2s ease-in;
+    transition: scale 0.25s ease-in;
+}
+
+.back-section svg {
+    width: 20px;
+    height: 20px;
 }
 
 .back-section svg:hover {

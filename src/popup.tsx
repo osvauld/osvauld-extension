@@ -14,7 +14,13 @@ import "./style.css";
 import { sendToBackground, type PlasmoMessaging } from "@plasmohq/messaging";
 
 let osvauld = (
-  <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="36"
+    height="36"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -52,13 +58,15 @@ function IndexPopup() {
 
   const nextPage = (newValue) => {
     setFolderSelect(newValue);
-    console.log(2, folderSelect);
   };
 
   const onHomeClick = () => {
     setFolderSelect(false);
     setAddingSecret(false);
     setCreateSuccess(false);
+  };
+  const backdown = (newValue) => {
+    setAddingSecret(newValue);
   };
 
   const closeAction = async () => {
@@ -103,7 +111,6 @@ function IndexPopup() {
       },
     });
     await storage.set("usernames", usernames.data.data.secrets);
-
     await getUserNames();
   };
 
@@ -130,6 +137,7 @@ function IndexPopup() {
     loginAction,
     nextPage,
     updateCreateSuccess,
+    backdown,
   }) => {
     if (!loginStatus) {
       return <LoginView loginAction={loginAction} />;
@@ -142,7 +150,7 @@ function IndexPopup() {
           }
           return <FolderSelect updateCreateSuccess={updateCreateSuccess} />;
         }
-        return <AddSecret nextPage={nextPage} />;
+        return <AddSecret nextPage={nextPage} backdown={backdown} />;
       }
       return <EmptyCreds />;
     }
@@ -153,7 +161,7 @@ function IndexPopup() {
         }
         return <FolderSelect updateCreateSuccess={updateCreateSuccess} />;
       }
-      return <AddSecret nextPage={nextPage} />;
+      return <AddSecret nextPage={nextPage} backdown={backdown} />;
     }
     if (credentialSelected) {
       return <CredView chageToList={chageToList} />;
@@ -162,18 +170,18 @@ function IndexPopup() {
   };
 
   return (
-    <div className="w-400 h-380 flex flex-col justify-around items-center bg-[#262C44]">
+    <div className="w-[380px] h-[520px] flex flex-col justify-around items-center bg-[#262C44]">
       <div className="name-with-icon w-11/12 flex self-center">
-        <div className="osvauld-logo">{osvauld}</div>
+        {loginStatus && <div className="osvauld-logo">{osvauld}</div>}
         <h2 className="text-white font-normal text-lg pl-2 mt-1 cursor-pointer">
-          shadow
           <span className="font-medium" onClick={closeAction}>
-            safe
+            OSV
           </span>
+          auld
         </h2>
         {loginStatus && (
           <span
-            className="primary-addsecret ml-44 hover:bg-[#3A4468] transition ease-in cursor-pointer "
+            className="primary-addsecret ml-auto hover:bg-[#3A4468] mt-0 transition ease-in cursor-pointer "
             onClick={callAddingSecret}
           >
             <Icon icon="mingcute:add-fill" className="text-lg" />
@@ -190,6 +198,7 @@ function IndexPopup() {
           loginAction={loginAction}
           nextPage={nextPage}
           updateCreateSuccess={updateCreateSuccess}
+          backdown={backdown}
         />
       </div>
     </div>
