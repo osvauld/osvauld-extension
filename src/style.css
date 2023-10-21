@@ -8,88 +8,161 @@ body {
     font-family: "Inter";
 }
 
-.home-container {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #3A4468;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    box-sizing: border-box;
-    position: relative;
+.osvauld-logo {
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
-.list-item {
-    min-height: 25%;
+.osvauld-logo > svg {
+    width: 24px;
+    height: 24px;
+}
+
+.primary-addsecret {
+    background-color: #4E46DC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 50px;
+    height: 24px;
+    border-radius: 25px;
+    margin-top: 10px;
+    color: white;
+    font-weight: bolder;
+}
+.home-container {
+    background-color: #262C44;
+    height: 100%;
+}
+
+.generic-search-container > svg {
+    margin-right: 10px;
+}
+.generic-search-container{
     width: 100%;
+    height: 30px;
+    background-color: #2E3654;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.generic-search {
+    width: 90%;
+    background-color: #2E3654;
+}
+
+input::-webkit-input-placeholder{
+    color: rgba(130, 140, 174, 1);
+}
+
+.domain-of-interest {
+    font-size:medium;
+    color: white;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.tags{
+    list-style: none ;
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+.tags > li{
+    background-color: #2E3654;
+    color: rgba(130, 140, 174, 1);
+    height: 20px;
+    margin-right: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 6%;
+    padding: 10px;
+    border-radius: 3px;
 }
 
-
-.heading  {
-    min-height: 25%;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 600;
+.tags > li.selected {
+    background-color: #837EE6 ;
     color: white;
-    line-height: 24px;
-    padding-top: 20px;
-    padding-left: 20px;
-    position: sticky;
-    top: 0;
-    background-color: #2E3654;
-    z-index: 10;
+}
+
+.tags > li > span {
+    margin-right: 5px;
 }
 
 
-.list-item:nth-of-type(odd){
-    background-color: #2E3654;
-}
 
-.list-item:nth-of-type(even){
-    background-color: #3A4468;
-}
-
-
-.list-item p {
-    margin-left: 10px;
-    line-height: 24px;
-    font-size: 16px;
+.heading h2 {
+    font-size: small;
+    margin-bottom: 10px;
+    font-weight: normal;
     color: #828CAE;
-    font-weight: medium;
-    line-height: 24px;
-    transition: scale 0.15s ease-in;
 }
 
-.list-item:hover p {
-        scale: 1.06;
+.list-container {
+    min-height: 200px;
+    background-color: #2E3654;
+    border-radius: 5px;
+}
+
+.list-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    font-weight:lighter;
+    color: white;
+}
+
+.list-item .individual-item:first-of-type {
+    background-color: #2E3654;
+    margin-top: 5px;
+}
+
+
+.list-item > .individual-item {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    height: 50px;
+    width: 95%;
+    border: 1px solid rgba(76, 89, 139, 0.3);
+    font-weight: normal;
+    transition:  background-color 0.15s ease-in;
+}
+
+.left-section {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-left: 20px;
+}
+
+.left-section .key-icon {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    color: #828CAE;
+}
+
+
+.list-item > .individual-item:hover {
+  background-color: #3A4468;
 }
 
 .list-item .icon-enter {
     width: 30%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.11s ease-in;
 }
 
-.list-item .icon-enter svg {
-    transition: scale 0.15s ease-in;
-} 
-
-.list-item .icon-enter:hover {
-    background-color: #262C44;
-}
-
-
-.list-item .icon-enter:hover svg {
-    scale: 1.4;
-}
 
 
 .cred-container {
@@ -99,20 +172,22 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #262C44;
+    background-color: #2E3654;
+    border-radius: 10px;
     box-sizing: border-box;
+    padding-bottom: 25px;
 }
 
 
 
 .back-section {
+    margin-top: 60px;
     width: 90%;
-    height: 20%;
-    transition: scale 0.15s ease-in;
+    transition: scale 0.2s ease-in;
 }
 
 .back-section svg:hover {
-    scale: 1.4;
+    scale: 1.2;
 }
 
 
@@ -125,19 +200,21 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    padding-bottom: 0;
 }
 
 .cred-section h3 {
     font-size: small;
     font-weight: normal;
     margin: 5px 0;
+    color: #828CAE;
 }
 
 .cred-section p {
     font-size: small;
     font-weight: normal;
     margin: 5px 0;
-    color: #828CAE;
+    color: white;
 }
 
 .cred-section svg {
@@ -149,12 +226,12 @@ body {
 
 .username, .password {
     width: 100%;
-    border: 1px solid #828CAE;
+    border: 1px solid #4C598B4D;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
     height: 40px;
     background-color: #2E3654;
     margin-bottom: 5px;
@@ -173,27 +250,33 @@ body {
     padding-left: 5px;
     font-size: medium;
     font-weight: normal;
-    color: #828CAE;
+    color: white;
   }
 
 
 
 .button-section {
-   padding-top: 25px;
+   padding-top: 10px;
+   width: 100%;
+   padding-left: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .button-section button {
+    width: 80%;
     background-color:  #4E46DC;
     font-size: small;
     font-weight: normal;
     color: white;
-    padding: 10px 50px;
+    padding: 12px 50px;
     border-radius: 30px;
     transition: background-color 0.15s ease;
 }
 
 
-.login-button button:hover {
+.button-section  button:hover {
     background-color: #3A4468;
 }
 
@@ -209,3 +292,4 @@ body {
     color: red;
     letter-spacing: 0.4px;
 }
+
