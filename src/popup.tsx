@@ -8,18 +8,13 @@ import LoginView from "./components/LoginView";
 import CredsListed from "./components/CredsListed";
 import AddSecret from "./components/AddSecret";
 import FolderSelect from "./components/FolderSelect";
+import AddSecretSuccess from "./components/AddSecretSuccess";
 
 import "./style.css";
 import { sendToBackground, type PlasmoMessaging } from "@plasmohq/messaging";
 
 let osvauld = (
-  <svg
-    width="36"
-    height="36"
-    viewBox="0 0 48 48"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -37,6 +32,11 @@ function IndexPopup() {
   let [credentialSelected, setCredentialSelected] = useState(false);
   let [addingSecret, setAddingSecret] = useState(false);
   let [folderSelect, setFolderSelect] = useState(false);
+  const [createSuccess, setCreateSuccess] = useState(false);
+
+  const updateCreateSuccess = () => {
+    setCreateSuccess(true);
+  };
 
   const updateCredentialSelected = (newValue) => {
     setCredentialSelected(newValue);
@@ -53,6 +53,12 @@ function IndexPopup() {
   const nextPage = (newValue) => {
     setFolderSelect(newValue);
     console.log(2, folderSelect);
+  };
+
+  const onHomeClick = () => {
+    setFolderSelect(false);
+    setAddingSecret(false);
+    setCreateSuccess(false);
   };
 
   const closeAction = async () => {
@@ -123,6 +129,7 @@ function IndexPopup() {
     updateCredentialSelected,
     loginAction,
     nextPage,
+    updateCreateSuccess,
   }) => {
     if (!loginStatus) {
       return <LoginView loginAction={loginAction} />;
@@ -130,7 +137,10 @@ function IndexPopup() {
     if (!credentialList) {
       if (addingSecret) {
         if (folderSelect) {
-          return <FolderSelect />;
+          if (createSuccess) {
+            return <AddSecretSuccess onHomeClick={onHomeClick} />;
+          }
+          return <FolderSelect updateCreateSuccess={updateCreateSuccess} />;
         }
         return <AddSecret nextPage={nextPage} />;
       }
@@ -138,7 +148,10 @@ function IndexPopup() {
     }
     if (addingSecret) {
       if (folderSelect) {
-        return <FolderSelect />;
+        if (createSuccess) {
+          return <AddSecretSuccess onHomeClick={onHomeClick} />;
+        }
+        return <FolderSelect updateCreateSuccess={updateCreateSuccess} />;
       }
       return <AddSecret nextPage={nextPage} />;
     }
@@ -176,6 +189,7 @@ function IndexPopup() {
           updateCredentialSelected={updateCredentialSelected}
           loginAction={loginAction}
           nextPage={nextPage}
+          updateCreateSuccess={updateCreateSuccess}
         />
       </div>
     </div>
