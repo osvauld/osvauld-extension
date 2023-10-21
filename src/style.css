@@ -39,7 +39,7 @@ body {
 .generic-search-container > svg {
     margin-right: 10px;
 }
-.generic-search-container{
+.generic-search-container {
     width: 100%;
     height: 30px;
     background-color: #2E3654;
@@ -53,10 +53,12 @@ body {
 .generic-search {
     width: 90%;
     background-color: #2E3654;
+    outline: none;
+    color: white;
 }
 
 input::-webkit-input-placeholder{
-    color: rgba(130, 140, 174, 1);
+    color: rgba(130, 140, 174, 0.6);
 }
 
 .domain-of-interest {

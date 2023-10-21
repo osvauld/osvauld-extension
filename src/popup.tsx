@@ -174,10 +174,10 @@ function IndexPopup() {
       <div className="name-with-icon w-11/12 flex self-center">
         {loginStatus && <div className="osvauld-logo">{osvauld}</div>}
         <h2 className="text-white font-normal text-lg pl-2 mt-1 cursor-pointer">
-          shadow
           <span className="font-medium" onClick={closeAction}>
-            safe
+            OSV
           </span>
+          auld
         </h2>
         {loginStatus && (
           <span
