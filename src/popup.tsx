@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Icon } from "@iconify/react";
 import { Storage } from "@plasmohq/storage";
 
@@ -40,6 +40,15 @@ function IndexPopup() {
   let [folderSelect, setFolderSelect] = useState(false);
   const [createSuccess, setCreateSuccess] = useState(false);
 
+  console.log(
+    loginStatus,
+    credentialList,
+    credentialSelected,
+    addingSecret,
+    folderSelect,
+    createSuccess
+  );
+
   const updateCreateSuccess = () => {
     setCreateSuccess(true);
   };
@@ -48,8 +57,9 @@ function IndexPopup() {
     setCredentialSelected(newValue);
   };
 
-  const chageToList = (newValue) => {
+  const chageToList = async (newValue) => {
     setCredentialSelected(newValue);
+    await storage.set("liveCred", false);
   };
 
   const loginAction = (newValue) => {
@@ -83,7 +93,6 @@ function IndexPopup() {
 
   const callAddingSecret = () => {
     setAddingSecret(true);
-    console.log("Secret is added");
   };
 
   useEffect(() => {
@@ -99,6 +108,10 @@ function IndexPopup() {
     usernameList = await storage.get("usernames");
     if (usernameList.length > 0) {
       setCredentialList(true);
+    }
+    let liveCred: boolean = await storage.get("liveCred");
+    if (liveCred) {
+      setCredentialSelected(true);
     }
   };
 
