@@ -2,15 +2,13 @@
 import { Storage } from "@plasmohq/storage";
 const storage = new Storage();
 
-// This the part were we listen for new Urls visited and compated with the urls we have on our array, If there is a match, url is sent to the backed to fetch Usernames.
-
 async function testBaseStorage(usernames) {
  
   await storage.remove("usernames");
   await storage.set("usernames", usernames);
 
   let read = await storage.get("usernames");
-  console.log('Set usernames', read )
+ // console.log('Set usernames', read )
 }
 
 async function fetchUrls() {
@@ -87,16 +85,26 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
   });
 });
 
+
+// chrome.runtime.onConnect.addListener(function(port) {
+//   if (port.name === "popup") {
+//       port.onDisconnect.addListener(async function() {
+//          console.log("popup has been closed");
+//          await storage.set("liveCred", false);
+//       });
+//   }
+// });
+
 let concernedUrls;
 
 async function main() {
   try {
     concernedUrls = await fetchUrls();
-    console.log('Concered URLs ==> ',    concernedUrls)
+    //console.log('Concered URLs ==> ',    concernedUrls)
     let activeUrl = await chrome.tabs.query({ active: true});
-    console.log('Fetching usernames trigger: Login, active tab')
+   // console.log('Fetching usernames trigger: Login, active tab')
     const storage = new Storage();
-    console.log(activeUrl)
+   // console.log(activeUrl)
     let hostname = new URL(activeUrl[0].url).hostname;
     if (concernedUrls.includes(hostname)) {
       (async () => {
