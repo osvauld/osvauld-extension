@@ -80,9 +80,12 @@ const CredView = ({ chageToList }) => {
       });
 
       setSecret(secret.data.data.password);
+      console.log(
+        "secret as received in credview =>",
+        secret.data.data.password
+      );
       setSelectedUsername(list[selectedIndex].username);
       await storage.set("liveCred", true);
-      console.log("setting livecred to true in cred view");
     })();
   }, []);
 

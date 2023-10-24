@@ -40,15 +40,6 @@ function IndexPopup() {
   let [folderSelect, setFolderSelect] = useState(false);
   const [createSuccess, setCreateSuccess] = useState(false);
 
-  console.log(
-    loginStatus,
-    credentialList,
-    credentialSelected,
-    addingSecret,
-    folderSelect,
-    createSuccess
-  );
-
   const updateCreateSuccess = () => {
     setCreateSuccess(true);
   };
@@ -70,10 +61,13 @@ function IndexPopup() {
     setFolderSelect(newValue);
   };
 
-  const onHomeClick = () => {
+  const onHomeClick = async () => {
     setFolderSelect(false);
     setAddingSecret(false);
     setCreateSuccess(false);
+
+    //Need to fetch usernames again and show it here
+    await fetchUsername();
   };
   const backdown = (newValue) => {
     setAddingSecret(newValue);
