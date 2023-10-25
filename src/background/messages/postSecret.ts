@@ -15,8 +15,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const url = 'http://api.shadowsafe.xyz/secrets';
   const data = {
     credentials: trust,
-    parent: "req.body.id",
-    description: 'Tst',
+    parent: req.body.id,
+    description: 'Test',
   };
 
   try {
@@ -34,8 +34,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     }
 
     const responseData = await response.json();
-    console.log(responseData);
-    res.send('Your data');
+    console.log('tried to add secret', responseData);
+    res.send(responseData);
   } catch (error) {
     console.error('Error:', error);
   }

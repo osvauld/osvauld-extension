@@ -107,7 +107,7 @@ input::-webkit-input-placeholder{
 }
 
 .list-container {
-    height: 200px;
+    height: 260px;
     background-color:  #262C44;
     border-radius: 5px;
     overflow-y: scroll;
@@ -317,3 +317,9 @@ input::-webkit-input-placeholder{
     letter-spacing: 0.4px;
 }
 
+.folder-active {
+    background-color: #828CAE;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}

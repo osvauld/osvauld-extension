@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Folder } from "~components/FolderSelect";
+import { Storage } from "@plasmohq/storage";
 
 type EntryProps = {
   entry: {
@@ -72,7 +73,12 @@ const FolderIcon = () => {
         </g>
         <defs>
           <clipPath id="clip0_1496_124370">
-            <rect width="19.5" height="16.5" fill="white" transform="translate(0 0.75)" />
+            <rect
+              width="19.5"
+              height="16.5"
+              fill="white"
+              transform="translate(0 0.75)"
+            />
           </clipPath>
         </defs>
       </svg>
@@ -81,14 +87,35 @@ const FolderIcon = () => {
 };
 
 const TreeView = ({ entry, depth, onSelect }: EntryProps) => {
+  const storage = new Storage();
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      await storage.set("focusedFolder", entry.id);
+      //call to backed here
+      // const { data } = await sendToBackground({
+      //   name: "postSecret",
+      //   body: {
+      //     id: entry.id,
+      //   },
+      // });
+    })();
+  }, []);
 
   return (
     <div>
       <button
-        onClick={() => {
+        onClick={(e) => {
           setIsExpanded((prev) => !prev);
           onSelect(entry.label);
+          const parentElement = e.target.parentNode;
+          const previouslySelectedElement =
+            document.querySelector(".folder-active");
+          if (previouslySelectedElement) {
+            previouslySelectedElement.classList.remove("folder-active");
+          }
+          parentElement.classList.add("folder-active");
         }}
         className="flex mt-2 justify-center items-center"
       >
