@@ -1,7 +1,11 @@
 import { Storage } from "@plasmohq/storage";
 import React, { useState, useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
-import { sendToBackground, type PlasmoMessaging } from "@plasmohq/messaging";
+import { sendToBackground, sendToContentScript } from "@plasmohq/messaging";
+
+// const resp = await sendToBackgroundViaRelay({
+//   name: "ping",
+// });
 
 const CredView = ({ chageToList }) => {
   const [selectedUsername, setSelectedUsername] = useState();
@@ -149,9 +153,18 @@ const CredView = ({ chageToList }) => {
           </div>
         </div>
       </div>
-      {/* <div className="button-section ">
-                    <button >Fill Credentials</button>
-            </div> */}
+      <div className="button-section ">
+        <button
+          onClick={async () => {
+            await sendToContentScript({
+              name: "query-selector-text",
+              body: [selectedUsername, secret],
+            });
+          }}
+        >
+          Fill Credentials
+        </button>
+      </div>
     </div>
   );
 };

@@ -65,7 +65,7 @@ function IndexPopup() {
     setFolderSelect(false);
     setAddingSecret(false);
     setCreateSuccess(false);
-
+    setCredentialSelected(false);
     //Need to fetch usernames again and show it here
     await fetchUsername();
   };
@@ -181,10 +181,10 @@ function IndexPopup() {
       <div className="name-with-icon w-11/12 flex self-center">
         {loginStatus && <div className="osvauld-logo">{osvauld}</div>}
         <h2 className="text-white font-normal text-lg pl-2 mt-1 cursor-pointer">
+          os
           <span className="font-medium" onClick={closeAction}>
-            OSV
+            vauld
           </span>
-          auld
         </h2>
         {loginStatus && (
           <span
