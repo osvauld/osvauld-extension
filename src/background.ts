@@ -74,16 +74,73 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
   chrome.tabs.get(activeInfo.tabId, function (tab) {
     const justHostname = new URL(tab.url).hostname;
       const subdomainPattern = /^([a-z0-9-]+\.)*[a-z0-9-]+\.[a-z]+$/;
-      console.log('current hostname', justHostname)
+      console.log('current hostname ===>', justHostname)
       if (subdomainPattern.test(justHostname)){
         (async () => {
         console.log(justHostname, "we need this url our target");
         let usernames = await usernamefetch(justHostname);
+        console.log('Associated usernames =>', usernames)
         await testBaseStorage(usernames.data.secrets);
       })();
     }
   });
 });
+
+
+// 1) Function will be on background script, will we run when the extension is loaded.
+chrome.runtime.onInstalled.addListener(async () => {
+  // 2) Define sample data. console.log data for mock purposes.
+  const data = "Hello, world!";
+  console.log("Data:", data);
+
+  // 3) Generate public and private key with RSA.
+  const keyPair = await crypto.subtle.generateKey(
+    {
+      name: "RSA-OAEP",
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: "SHA-256",
+    },
+    true,
+    ["encrypt", "decrypt"]
+  );
+  const publicKey = keyPair.publicKey;
+  const privateKey = keyPair.privateKey;
+
+  // 4) Store private key with storage api.
+  const privateKeyData = await crypto.subtle.exportKey("jwk", privateKey);
+  chrome.storage.local.set({ privateKey: privateKeyData });
+
+  // 5) Store public key with storage api.
+  const publicKeyData = await crypto.subtle.exportKey("jwk", publicKey);
+  chrome.storage.local.set({ publicKey: publicKeyData });
+
+  // 6) Encrypt data with public key
+  const dataBuffer = new TextEncoder().encode(data);
+  const encryptedData = await crypto.subtle.encrypt(
+    {
+      name: "RSA-OAEP",
+    },
+    publicKey,
+    dataBuffer
+  );
+
+  // 7) Console encrypted data
+  console.log("Encrypted data:", new Uint8Array(encryptedData));
+
+  // 8) Decrypt with private key
+  const decryptedData = await crypto.subtle.decrypt(
+    {
+      name: "RSA-OAEP",
+    },
+    privateKey,
+    encryptedData
+  );
+
+  // 9) Console decrypted message.
+  console.log("Decrypted message:", new TextDecoder().decode(decryptedData));
+});
+
 
 
 // chrome.runtime.onConnect.addListener(function(port) {
