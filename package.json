@@ -7,25 +7,33 @@
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "test": "plasmo test"
+    "test": "plasmo test",
+    "preinstall": "npx allow-scripts auto",
+    "build2": "browserify src/popup.tsx -t [ babelify --presets [@babel/preset-react] ] -o dist/bundle.js"
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
     "@plasmohq/messaging": "^0.5.0",
     "@plasmohq/storage": "^1.8.0",
     "js-cookie": "^3.0.5",
+    "lavamoat": "^8.0.0",
     "plasmo": "0.83.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
     "@ianvs/prettier-plugin-sort-imports": "4.1.0",
+    "@lavamoat/allow-scripts": "^3.0.0",
     "@types/chrome": "0.0.245",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "^10.4.16",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
     "postcss": "^8.4.30",
     "prettier": "3.0.3",
     "tailwindcss": "^3.3.3",
@@ -47,6 +55,25 @@
     ],
     "host_permissions": [
       "<all_urls>"
-    ]
+    ],
+    "externally_connectable": {
+      "matches": [
+        "*://127.0.0.1/*"
+      ],
+      "ids": [
+        "bhfoljdmecmfjblkbonecndkambhdnmb"
+      ]
+    }
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "$root$": false,
+      "plasmo>@parcel/core>@parcel/cache>lmdb": false,
+      "plasmo>@parcel/core>msgpackr>msgpackr-extract": false,
+      "plasmo>@plasmohq/parcel-config>@parcel/config-default>@parcel/optimizer-swc>@swc/core": false,
+      "plasmo>@plasmohq/parcel-config>@plasmohq/parcel-optimizer-es>@swc/core": false,
+      "plasmo>@plasmohq/parcel-config>@plasmohq/parcel-resolver-post>tsup>esbuild": false,
+      "plasmo>sharp": false
+    }
   }
 }
