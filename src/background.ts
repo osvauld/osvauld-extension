@@ -96,6 +96,15 @@ chrome.runtime.onConnectExternal.addListener(function(port) {
   });
 });
 
+
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.tabs.create({
+      url: "./tabs/account-starter.html"
+    })
+  }
+});
+
 // // Listen for a message from the web page
 // chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 //   if (request.action === "status") {
