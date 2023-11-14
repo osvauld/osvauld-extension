@@ -230,7 +230,7 @@ input::-webkit-input-placeholder{
 .cred-section h3 {
     font-size: small;
     font-weight: normal;
-    margin: 5px 0;
+    margin-left: 120px;
     color: #828CAE;
 }
 
@@ -297,6 +297,10 @@ input::-webkit-input-placeholder{
     padding: 12px 50px;
     border-radius: 30px;
     transition: background-color 0.15s ease;
+}
+
+.button-section button:active {
+    transform: scale(0.98);
 }
 
 

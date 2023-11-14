@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Storage } from "@plasmohq/storage";
+import { SecureStorage } from "@plasmohq/storage/secure";
 
 const LoginView = ({ loginAction }) => {
   const storage = new Storage();
@@ -45,6 +46,22 @@ const LoginView = ({ loginAction }) => {
     }
   };
 
+  const decryptPrivate = async () => {
+    console.log("Decrypting Private key", password);
+    const secuStorage = new SecureStorage();
+    await secuStorage.setPassword(password);
+    // Below step needs to be done at the beginning
+    //  await secuStorage.set("private", "gibberish123uyidfgudsfkasdgyfkuasdgfs");
+    const privateKey = await secuStorage.get("private");
+    if (privateKey) {
+      await storage.set("loginStatus", true);
+      loginAction(true);
+    } else {
+      console.error("Wrong PIN");
+      setError(true);
+    }
+  };
+
   let osvauld = (
     <svg
       width="36"
@@ -66,15 +83,15 @@ const LoginView = ({ loginAction }) => {
     <div className="cred-container">
       <div className="mock-logo">{osvauld}</div>
       <div className="cred-section">
-        <h3>Username</h3>
+        {/* <h3>Username</h3>
         <div className="username">
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </div>
-        <h3>Password</h3>
+        </div> */}
+        <h3>PIN</h3>
         <div className="password">
           <input
             type={inputType}
@@ -111,12 +128,12 @@ const LoginView = ({ loginAction }) => {
         </div>
         {error && (
           <div className="error-message">
-            <p>Authentication Failed!</p>
+            <p>Wrong PIN!</p>
           </div>
         )}
       </div>
       <div className="button-section login-button">
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={decryptPrivate}>Access</button>
       </div>
     </div>
   );
