@@ -2,7 +2,7 @@ import { Storage } from "@plasmohq/storage";
 
 import React, { useState } from "react";
 
-const CreatePassword = () => {
+const CreatePassword = ({ handlePasswordSubmit }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isMatch, setIsMatch] = useState(true);
@@ -23,11 +23,13 @@ const CreatePassword = () => {
       // Handle the submission logic here
       const storage = new Storage();
       await storage.set("password", password);
+      handlePasswordSubmit();
     }
   };
 
   return (
     <div className="password-content">
+      <h6 className="page-count">1/4</h6>
       <h2 className="main-heading">Create password</h2>
       <p className="main-pitch">
         This password will unlock your osvauld account only in this device.
@@ -36,7 +38,7 @@ const CreatePassword = () => {
       </p>
       <form onSubmit={handleSubmit} className="password-form">
         <div className="form-group">
-          <label>New Password(8 characters min):</label>
+          <label>New Password:</label>
           <input
             type="password"
             value={password}

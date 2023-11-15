@@ -15,8 +15,8 @@
       }
 
       .container {
-        margin-top: 100px;
-        padding-top: 100px;
+        margin-top: 60px;
+        padding-top: 50px;
         width: 600px;
         height: 700px;
         border: 1px solid rgba(76, 89, 139, 0.3);
@@ -54,6 +54,13 @@
           transform: scale(0.98);
       }
 
+
+      .page-count {
+        font-size: 16px;
+        font-weight: 100;
+        letter-spacing: 2px;
+        margin: 0 0;
+      }
 
       .password-content {
 
@@ -149,3 +156,137 @@
         /* Style for the submit button */
       }
       
+
+      .seedphrase-instructions {
+        /* Your container styles */
+      }
+      
+      
+      .video-container {
+         margin: 20px 0 20px 0;
+      }
+      .video-container iframe {
+        border-radius: 10px;
+      }
+      
+      .action-buttons {
+        /* Styles for the action buttons container */
+      }
+      
+      .remind-later-btn {
+        /* Styles for the remind me later button */
+      }
+      
+      .secure-my-wallet-btn {
+        background-color: #4E46DC;
+        color: white;
+        font-weight: 900;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        padding: 15px 60px;
+      }
+
+      .secure-my-wallet-btn:active {
+        transform: scale(0.98);
+      }
+      
+      .info-section {
+        text-align: left;
+        padding: 0 20px;
+        margin: 0;
+      }
+
+      .info-section h3{
+        margin-bottom: 0;
+      }
+      .info-section p {
+        margin: 0;
+      }
+
+      .info-section ul {
+        margin: 0;
+      }
+
+      
+      .info-section .warning-text {
+        background-color: #828CAE;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 20px;
+        color: #000;
+        margin-top: 20px;
+      }
+      
+
+
+      .seed-generation {
+        /* Styles for the component */
+        padding: 30px 50px;
+      }
+
+      .seed-generation h6 {
+        font-size: 14px;
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 0;
+      }
+
+      .seed-generation h5 {
+        text-align: left;
+      }
+
+      .seed-generation p {
+        /* Styles for the description paragraph */
+      }
+     
+
+      .tips {
+       text-align: left;
+       margin: 10px 0 30px 0;
+      }
+
+      .words-container {
+        display: grid;
+        gap: 10px;
+        /* Add a background or any styles to resemble the black opaque screen */
+        background-color: black;
+        color: white;
+        padding: 20px;
+        height: 200px;
+        border: 1px solid rgba(76, 89, 139, 0.3);
+
+      }
+
+      .words-container.revealed {
+        cursor: default;
+        background: none;
+        color: initial;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .words-container .mask {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .word {
+        color: #fff;
+      }
+
+      .word-target {
+        display: inline-block;
+        margin-left: 5px;
+        width: 100px;
+        border: 1px solid rgba(76, 89, 139, 0.3);
+        padding: 5px 10px;
+        border-radius: 25px;
+      }
+
+      .secure-my-wallet-btn.reveal {
+        margin-top: 30px;
+      
+      }
