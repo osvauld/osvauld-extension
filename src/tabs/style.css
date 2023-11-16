@@ -1,292 +1,266 @@
 
-      * {
-        box-sizing: border-box;
-      }
+* {
+  box-sizing: border-box;
+}
 
-      body {
-        font-family: 'Arial', sans-serif;
-        background-color:  #2E3654;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-      }
+body {
+  font-family: 'Arial', sans-serif;
+  background-color:  #2E3654;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-      .container {
-        margin-top: 60px;
-        padding-top: 50px;
-        width: 600px;
-        height: 700px;
-        border: 1px solid rgba(76, 89, 139, 0.3);
-        border-radius: 20px;
-        color: #fff;
-        text-align: center;
-      }
+.container {
+  margin-top: 60px;
+  padding-top: 50px;
+  width: 600px;
+  height: 700px;
+  border: 1px solid rgba(76, 89, 139, 0.3);
+  border-radius: 20px;
+  color: #fff;
+  text-align: center;
+}
 
-      .starter-buttons {
-        margin-top: 30%;
-        width: 100%;
-        padding-left: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+.starter-buttons {
+  margin-top: 30%;
+  width: 100%;
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-      }
+}
 
-      .starter-buttons button {
-          width: 60%;
-          background-color:  #4E46DC;
-          font-size: 16px;
-          font-weight: normal;
-          color: white;
-          padding: 15px 30px;
-          border-radius: 30px;
-          border: 0;
-          margin: 10px 0;
-          cursor: pointer;
-          transition: background-color 0.15s ease;
-      }
+.starter-buttons button {
+  width: 60%;
+  background-color:  #4E46DC;
+  font-size: 16px;
+  font-weight: normal;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 30px;
+  border: 0;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
 
-      .starter-buttons button:active {
-          transform: scale(0.98);
-      }
-
-
-      .page-count {
-        font-size: 16px;
-        font-weight: 100;
-        letter-spacing: 2px;
-        margin: 0 0;
-      }
-
-      .password-content {
-
-     
-      }
+.starter-buttons button:active {
+    transform: scale(0.98);
+}
 
 
-      .password-form {
-        margin-top: 100px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      
-      .form-group {
-        width: 100%;
-        margin-bottom: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      
-      .input {
-        margin-top: 5px;
-        padding: 0.5rem;
-        width: 50%;
-        border: 1px solid rgba(76, 89, 139, 0.3);
-        color: #fff;
-        border-radius: 4px;
-        background-color: transparent;
-      }
-
-      .input:focus {
-        outline: none;
-      }
-      
-      .input-error {
-        border-color: rgba(255,0,0,0.3);
-      }
-      
-      .error-text {
-        color: red;
-        font-size: 0.8rem;
-        margin-top: 0.5rem;
-      }
-      
-      .submit-btn {
-        background-color: #4E46DC;
-        color: white;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-      }
-
-      .submit-btn:active {
-        transform: scale(0.98);
-      }
-      
-      .submit-btn:disabled {
-        background-color: #828CAE;
-      }
-      
-
-      .wallet-reset-form {
-        /* Add your styling here */
-      }
-      
-      .phrase-length-selector {
-        /* Style for the dropdown selector */
-      }
-      
-      .recovery-phrase-inputs {
-        /* Style for the phrase inputs container */
-      }
-      
-      .recovery-input {
-        /* Style for each recovery phrase input */
-      }
-      
-      .password-inputs {
-        /* Style for the password inputs container */
-      }
-      
-      .password-input {
-        /* Style for each password input */
-      }
-      
-      .restore-button {
-        /* Style for the submit button */
-      }
-      
-
-      .seedphrase-instructions {
-        /* Your container styles */
-      }
-      
-      
-      .video-container {
-         margin: 20px 0 20px 0;
-      }
-      .video-container iframe {
-        border-radius: 10px;
-      }
-      
-      .action-buttons {
-        /* Styles for the action buttons container */
-      }
-      
-      .remind-later-btn {
-        /* Styles for the remind me later button */
-      }
-      
-      .secure-my-wallet-btn {
-        background-color: #4E46DC;
-        color: white;
-        font-weight: 900;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        padding: 15px 60px;
-      }
-
-      .secure-my-wallet-btn:active {
-        transform: scale(0.98);
-      }
-      
-      .info-section {
-        text-align: left;
-        padding: 0 20px;
-        margin: 0;
-      }
-
-      .info-section h3{
-        margin-bottom: 0;
-      }
-      .info-section p {
-        margin: 0;
-      }
-
-      .info-section ul {
-        margin: 0;
-      }
-
-      
-      .info-section .warning-text {
-        background-color: #828CAE;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 10px 20px;
-        color: #000;
-        margin-top: 20px;
-      }
-      
+.page-count {
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 2px;
+  margin: 0 0;
+}
 
 
-      .seed-generation {
-        /* Styles for the component */
-        padding: 30px 50px;
-      }
+.password-form {
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-      .seed-generation h6 {
-        font-size: 14px;
-        font-weight: 900;
-        text-align: center;
-        margin-bottom: 0;
-      }
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-      .seed-generation h5 {
-        text-align: left;
-      }
+.input {
+  margin-top: 5px;
+  padding: 0.5rem;
+  width: 50%;
+  border: 1px solid rgba(76, 89, 139, 0.3);
+  color: #fff;
+  border-radius: 4px;
+  background-color: transparent;
+}
 
-      .seed-generation p {
-        /* Styles for the description paragraph */
-      }
-     
+.input:focus {
+  outline: none;
+}
 
-      .tips {
-       text-align: left;
-       margin: 10px 0 30px 0;
-      }
+.input-error {
+  border-color: rgba(255,0,0,0.3);
+}
 
-      .words-container {
-        display: grid;
-        gap: 10px;
-        /* Add a background or any styles to resemble the black opaque screen */
-        background-color: black;
-        color: white;
-        padding: 20px;
-        height: 200px;
-        border: 1px solid rgba(76, 89, 139, 0.3);
+.error-text {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
 
-      }
+.submit-btn {
+  background-color: #4E46DC;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
 
-      .words-container.revealed {
-        cursor: default;
-        background: none;
-        color: initial;
-        grid-template-columns: repeat(3, 1fr);
-      }
+.submit-btn:active {
+  transform: scale(0.98);
+}
 
-      .words-container .mask {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+.submit-btn:disabled {
+  background-color: #828CAE;
+}
 
-      .word {
-        color: #fff;
-      }
+.secure-my-wallet-btn {
+  background-color: #4E46DC;
+  color: white;
+  font-weight: 900;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 15px 60px;
+  margin-top: 10px;
+}
 
-      .word-target {
-        display: inline-block;
-        margin-left: 5px;
-        width: 100px;
-        border: 1px solid rgba(76, 89, 139, 0.3);
-        padding: 5px 10px;
-        border-radius: 25px;
-      }
+.secure-my-wallet-btn:active {
+  transform: scale(0.98);
+}
 
-      .secure-my-wallet-btn.reveal {
-        margin-top: 30px;
-      
-      }
+.info-section {
+  text-align: left;
+  padding: 0 50px;
+  margin: 0;
+}
+
+.info-section h3{
+  margin-bottom: 0;
+}
+.info-section p {
+  margin: 0;
+}
+
+.info-section ul {
+  margin: 0;
+}
+
+
+.info-section .warning-text {
+  background-color: #828CAE;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  color: #000;
+  margin-top: 20px;
+}
+
+
+
+.seed-generation {
+  padding: 30px 50px;
+}
+
+.seed-generation h6 {
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.seed-generation h5 {
+  text-align: left;
+}
+
+
+.tips {
+  text-align: left;
+  margin: 10px 0 30px 0;
+}
+
+.words-container {
+  display: grid;
+  gap: 10px;
+  /* Add a background or any styles to resemble the black opaque screen */
+  background-color: black;
+  color: white;
+  padding: 20px;
+  height: 200px;
+  border: 1px solid rgba(76, 89, 139, 0.3);
+}
+
+.words-container.revealed {
+  cursor: default;
+  background: none;
+  color: initial;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.words-container .mask {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.word {
+  color: #fff;
+}
+
+.word-target {
+  display: inline-block;
+  margin-left: 5px;
+  width: 100px;
+  border: 1px solid rgba(76, 89, 139, 0.3);
+  padding: 5px 10px;
+  border-radius: 25px;
+}
+
+.secure-my-wallet-btn.reveal {
+  margin-top: 30px;
+
+}
+.secure-my-wallet-btn.reveal.reset {
+  background-color: #828CAE;
+}
+
+.words-container .word input {
+  color: #fff;
+  background: none;
+  display: inline-block;
+  margin-left: 5px;
+
+  width: 100px;
+  border: 1px solid rgb(217, 237, 5);
+  padding: 5px 30px;
+  border-radius: 25px;
+}
+.words-container .word input.matched {
+  border: 1px solid rgb(5, 237, 51);
+}
+
+.words-container .word input:focus {
+  outline: none;
+}
+
+.wallet-creation-success {
+  padding: 0 50px;
+}
+
+.wallet-creation-success h1 {
+  font-size: 28px;
+}
+
+.wallet-creation-success .success-message {
+  text-align: left;
+}

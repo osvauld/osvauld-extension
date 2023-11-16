@@ -1,50 +1,32 @@
 import React, { useState } from "react";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
 import CreatePassword from "./components/CreatePassword";
 import AccountRecovery from "./components/AccountRecovery";
 import SeedphraseInstructions from "./components/SeedphraseInstructions";
 import SeedGeneration from "./components/SeedGeneration";
+import SeedConfirmation from "./components/SeedConfirmation";
+import SuccessMessage from "./components/SuccessMessage";
 
 import "./style.css";
 
 export default function AccountStarter() {
-  const [passwordPage, setpasswordPage] = useState(false);
-  const [existingAccount, setexistingAccount] = useState(false);
-  const [passwordSet, setPasswordSet] = useState(false);
-  const [seedConfirmation, setSeedConfirmation] = useState(true);
-
-  const handleNewAccount = () => {
-    setpasswordPage((passwordPage) => !passwordPage);
-  };
-
-  const handleExistingAccount = () => {
-    setexistingAccount((existingAccount) => !existingAccount);
-  };
-
-  const handlePasswordSubmit = () => {
-    setPasswordSet((passwordSet) => !passwordSet);
-  };
-
-  const handleConfirmation = () => {
-    setSeedConfirmation((seedConfirmation) => !seedConfirmation);
-  };
-
   return (
-    <div className="container">
-      {seedConfirmation ? (
-        <SeedGeneration />
-      ) : passwordSet ? (
-        <SeedphraseInstructions handleConfirmation={handleConfirmation} />
-      ) : passwordPage ? (
-        <CreatePassword handlePasswordSubmit={handlePasswordSubmit} />
-      ) : existingAccount ? (
-        <AccountRecovery />
-      ) : (
-        <Welcome
-          handleNewAccount={handleNewAccount}
-          handleExistingAccount={handleExistingAccount}
-        />
-      )}
-    </div>
+    <Router>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/create-password" element={<CreatePassword />} />
+          <Route path="/account-recovery" element={<AccountRecovery />} />
+          <Route
+            path="/seedphrase-instructions"
+            element={<SeedphraseInstructions />}
+          />
+          <Route path="/seed-generation" element={<SeedGeneration />} />
+          <Route path="/seed-confirmation" element={<SeedConfirmation />} />
+          <Route path="/success-message" element={<SuccessMessage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }

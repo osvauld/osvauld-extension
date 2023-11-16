@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 
 const SeedGeneration = () => {
   // Static array of words, you would replace these with the actual words.
   const words = [
     "vouge",
     "weird",
-    "Jane",
+    "jane",
     "mighty",
     "sword",
     "eagle",
@@ -20,9 +21,15 @@ const SeedGeneration = () => {
 
   // State to track if the secret words are revealed
   const [revealed, setRevealed] = useState(false);
+  const navigate = useNavigate();
 
   const handleRevealClick = () => {
     setRevealed(true);
+  };
+
+  const handleNextClick = () => {
+    // Securely pass the words to the next component
+    navigate("/seed-confirmation", { state: { words } });
   };
 
   return (
@@ -54,7 +61,13 @@ const SeedGeneration = () => {
         )}
       </div>
       {revealed ? (
-        <button className="secure-my-wallet-btn reveal"> Next</button>
+        <button
+          className="secure-my-wallet-btn reveal"
+          onClick={handleNextClick}
+        >
+          {" "}
+          Next
+        </button>
       ) : (
         <button
           onClick={handleRevealClick}

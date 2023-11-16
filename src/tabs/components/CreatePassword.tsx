@@ -1,8 +1,9 @@
 import { Storage } from "@plasmohq/storage";
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const CreatePassword = ({ handlePasswordSubmit }) => {
+const CreatePassword = () => {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isMatch, setIsMatch] = useState(true);
@@ -20,10 +21,10 @@ const CreatePassword = ({ handlePasswordSubmit }) => {
     e.preventDefault();
     if (password === confirmPassword) {
       console.log("Password successfully set");
-      // Handle the submission logic here
       const storage = new Storage();
       await storage.set("password", password);
-      handlePasswordSubmit();
+      //Put the above in secure context Please
+      navigate("/seedphrase-instructions");
     }
   };
 

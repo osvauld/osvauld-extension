@@ -1,4 +1,16 @@
-export default function Welcome({ handleNewAccount, handleExistingAccount }) {
+import { useNavigate } from "react-router-dom";
+
+export default function Welcome() {
+  const navigate = useNavigate();
+
+  const handleNewAccount = () => {
+    navigate("/create-password");
+  };
+
+  const handleExistingAccount = () => {
+    navigate("/account-recovery");
+  };
+
   let osvauld = (
     <svg
       width="128"

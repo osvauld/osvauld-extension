@@ -7,7 +7,7 @@
     ".plasmo/index.d.ts",
     "./**/*.ts",
     "./**/*.tsx"
-  ],
+, "src/tabs/PasswordContext.js", "src/tabs/app.js", "src/tabs/PasswordProvider.js"  ],
   "compilerOptions": {
     "paths": {
       "~*": ["./src/*"]

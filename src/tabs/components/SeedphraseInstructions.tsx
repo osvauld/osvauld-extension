@@ -1,4 +1,8 @@
-const SeedphraseInstructions = ({ handleConfirmation }) => {
+import { useNavigate } from "react-router-dom";
+
+const SeedphraseInstructions = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="seedphrase-instructions">
       <h6 className="page-count">2/4</h6>
@@ -19,7 +23,12 @@ const SeedphraseInstructions = ({ handleConfirmation }) => {
         ></iframe>
       </div>
       <div className="action-button">
-        <button onClick={handleConfirmation} className="secure-my-wallet-btn">
+        <button
+          onClick={() => {
+            navigate("/seed-generation");
+          }}
+          className="secure-my-wallet-btn"
+        >
           Secure my Account
         </button>
       </div>
