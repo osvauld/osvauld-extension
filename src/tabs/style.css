@@ -70,22 +70,24 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .form-group {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
-.input {
+.form-group .input {
   margin-top: 5px;
   padding: 0.5rem;
   width: 50%;
-  border: 1px solid rgba(76, 89, 139, 0.3);
+  border: 1px solid rgba(228, 229, 232, 0.3);
   color: #fff;
   border-radius: 4px;
   background-color: transparent;
@@ -96,13 +98,17 @@ body {
 }
 
 .input-error {
-  border-color: rgba(255,0,0,0.3);
+  border-color: rgba(255,0,0,0.3) !important;
+}
+
+.input-ok {
+  border-color: rgba(5, 237, 51, 0.3) !important;
 }
 
 .error-text {
   color: red;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
+  font-size: 10px;
+  margin-top: 0.2rem;
 }
 
 .submit-btn {
@@ -163,6 +169,14 @@ body {
   padding: 10px 20px;
   color: #000;
   margin-top: 20px;
+}
+
+.headsup-text{
+  color: rgb(205, 205, 110);
+  margin: 0;
+  margin-top: 0.2rem;
+  padding: 0;
+  font-size: 10px;
 }
 
 

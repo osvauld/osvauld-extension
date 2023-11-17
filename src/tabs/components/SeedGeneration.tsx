@@ -1,27 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
+import { generateMnemonic, mnemonicToSeed } from "bip39";
+import { pki, random } from "node-forge";
 
 const SeedGeneration = () => {
-  // Static array of words, you would replace these with the actual words.
-  const words = [
-    "vouge",
-    "weird",
-    "jane",
-    "mighty",
-    "sword",
-    "eagle",
-    "fight",
-    "paper",
-    "grow",
-    "phone",
-    "screw",
-    "pencil",
-  ];
+  const [words, setWords] = useState([]);
 
-  // State to track if the secret words are revealed
+  const [keys, setKeys] = useState({ privateKey: "", publicKey: "" });
+
   const [revealed, setRevealed] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const generateKeys = async () => {
+      const mnemonic = generateMnemonic(128);
+      setWords(mnemonic.split(" ")); // Store mnemonic words in state
+      console.log(mnemonic);
+      // Convert the mnemonic to a seed
+      const seed = (await mnemonicToSeed(mnemonic)).toString("hex");
+
+      console.log(seed);
+
+      // // Use the seed to create a new PRNG for `node-forge`
+      const prng = random.createInstance();
+      prng.seedFileSync = () => seed;
+
+      // // Generate an RSA key pair using the seeded PRNG
+      // const { privateKey, publicKey } = pki.rsa.generateKeyPair({
+      //   bits: 4096,
+      //   prng,
+      //   workers: 2,
+      // });
+      // console.log(privateKey, publicKey);
+    };
+    generateKeys();
+  }, []);
 
   const handleRevealClick = () => {
     setRevealed(true);

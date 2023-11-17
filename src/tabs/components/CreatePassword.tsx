@@ -4,21 +4,29 @@ import { useNavigate } from "react-router-dom";
 
 const CreatePassword = () => {
   const navigate = useNavigate();
+  const [isLongEnough, setIsLongEnough] = useState(true);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isMatch, setIsMatch] = useState(true);
 
   const handlePasswordChange = async (e) => {
-    setPassword(e.target.value);
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setIsLongEnough(newPassword.length >= 6);
   };
 
   const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    setIsMatch(password === e.target.value);
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
+    setIsMatch(password === newConfirmPassword);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password.length < 6) {
+      setIsLongEnough(false);
+      return;
+    }
     if (password === confirmPassword) {
       console.log("Password successfully set");
       const storage = new Storage();
@@ -39,13 +47,18 @@ const CreatePassword = () => {
       </p>
       <form onSubmit={handleSubmit} className="password-form">
         <div className="form-group">
-          <label>New Password:</label>
+          <label>New Password(minimum 6 characters):</label>
           <input
             type="password"
             value={password}
             onChange={handlePasswordChange}
-            className="input"
+            className={isMatch ? "input input-ok" : "input"}
           />
+          {!isLongEnough && (
+            <p className="headsup-text">
+              Password must be at least 6 characters long.
+            </p>
+          )}
         </div>
         <div className="form-group">
           <label>Confirm Password:</label>
@@ -53,7 +66,7 @@ const CreatePassword = () => {
             type="password"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
-            className={isMatch ? "input" : "input input-error"}
+            className={isMatch ? "input input-ok" : "input input-error"}
           />
           {!isMatch && <p className="error-text">Passwords do not match!</p>}
         </div>
