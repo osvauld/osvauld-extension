@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { generateMnemonic, mnemonicToSeed } from "bip39";
-import { pki, random } from "node-forge";
+import { hdkey } from "ethereumjs-wallet";
 
 const SeedGeneration = () => {
   const [words, setWords] = useState([]);
@@ -20,19 +20,20 @@ const SeedGeneration = () => {
       // Convert the mnemonic to a seed
       const seed = (await mnemonicToSeed(mnemonic)).toString("hex");
 
-      console.log(seed);
+      // Derive an HD Wallet from the seed
+      const hdWallet = hdkey.fromMasterSeed(seed);
 
-      // // Use the seed to create a new PRNG for `node-forge`
-      const prng = random.createInstance();
-      prng.seedFileSync = () => seed;
+      // Derive the first account using the standard Ethereum HD path
+      const path = "m/44'/60'/0'/0/0"; // This is the standard derivation path for Ethereum
+      const wallet = hdWallet.derivePath(path).getWallet();
 
-      // // Generate an RSA key pair using the seeded PRNG
-      // const { privateKey, publicKey } = pki.rsa.generateKeyPair({
-      //   bits: 4096,
-      //   prng,
-      //   workers: 2,
-      // });
-      // console.log(privateKey, publicKey);
+      const privateKey = wallet.getPrivateKey().toString("hex");
+      const publicKey = wallet.getPublicKey().toString("hex");
+      const address = wallet.getAddress().toString("hex");
+
+      console.log(`Private Key: 0x${privateKey}`);
+      console.log(`Public Key: 0x${publicKey}`);
+      console.log(`Address: 0x${address}`);
     };
     generateKeys();
   }, []);
