@@ -83,18 +83,26 @@ const usernamefetch = async (requesturl) => {
 
 
 chrome.runtime.onConnectExternal.addListener(function(port) {
- // console.log("PORT!", port);
+  console.log("PORT!", port);
 
- // say hello every second once connection is made
-  // setInterval(function() {
-  //   port.postMessage("hi from chrome app");
-  //   console.log("trying to say hi")
-  // }, 5000);
+  setInterval(function() {
+    port.postMessage("hi from extension");
+     console.log("trying to say hi")
+  }, 5000);
 
   port.onMessage.addListener(function(msg) {
     // See other examples for sample onMessage handlers.
     console.log("Message communicated to bg => ", msg);
   });
+});
+
+
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.tabs.create({
+      url: "./tabs/account-starter.html"
+    })
+  }
 });
 
 // // Listen for a message from the web page
